@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Lloyd-stabilized Voronoï particle method — visual paper</title>
+<meta name="description" content="An interactive companion to the paper by Bruno Després and Borjan Geshkovski: the dependency graph of the results, exact statements and proofs, plain-language summaries, figures and movies of the stabilized Voronoï meshes.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="site/app.css">
+<link rel="icon" href="site/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="A Lloyd-stabilized Voronoï particle method — visual paper">
+<meta property="og:description" content="Dependency graph, statements, proofs, summaries, figures and movies for the paper by Després and Geshkovski.">
+<meta property="og:image" content="https://borjang.github.io/2026-lloyd-transport/media/vortex-stabilized-end.png">
+<script>
+  // Apply the saved theme before the first paint to avoid a flash.
+  try {
+    var t = localStorage.getItem("lloyd-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#panel">Skip to the reading panel</a>
+
+<header class="topbar">
+  <button type="button" class="topbar__brand" data-action="home" aria-label="Show the welcome panel">
+    <span class="topbar__mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2.5 20.5 8v8L12 21.5 3.5 16V8Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><path d="M12 2.5v6.2M20.5 8l-5.4 2.9M20.5 16l-5.4-2.9M12 21.5v-6.2M3.5 16l5.4-2.9M3.5 8l5.4 2.9" fill="none" stroke="currentColor" stroke-width="1.1" opacity=".55"/></svg>
+    </span>
+    <span class="topbar__titles">
+      <span class="topbar__kicker">Visual paper</span>
+      <span class="topbar__title">A Lloyd-stabilized Voronoï particle method</span>
+    </span>
+  </button>
+
+  <div class="topbar__search">
+    <label class="sr-only" for="search-input">Search results, equations, references</label>
+    <svg class="topbar__search-icon" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12.7 12.7 17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <input id="search-input" type="search" placeholder="Search “Gronwall”, Theorem 4.1, (2.3), Lloyd …" autocomplete="off" spellcheck="false">
+    <kbd class="topbar__kbd" aria-hidden="true">/</kbd>
+    <div id="search-results" class="search-results" role="listbox" hidden></div>
+  </div>
+
+  <nav class="topbar__links" aria-label="Reference pages">
+    <a href="#notation" class="topbar__link">Notation</a>
+    <a href="#bib" class="topbar__link">References</a>
+    <a id="pdf-link" class="topbar__link" href="#" hidden>PDF</a>
+  </nav>
+
+  <div class="topbar__actions">
+    <div class="segmented" role="group" aria-label="Text size">
+      <button type="button" class="segmented__btn" data-action="text-smaller" aria-label="Smaller text" title="Smaller text">A<span class="segmented__sup">−</span></button>
+      <button type="button" class="segmented__btn segmented__btn--reset" data-action="text-reset" aria-label="Reset text size" title="Reset text size">A</button>
+      <button type="button" class="segmented__btn" data-action="text-larger" aria-label="Larger text" title="Larger text">A<span class="segmented__sup">+</span></button>
+    </div>
+    <button type="button" class="chip-btn" data-action="toggle-graph" aria-pressed="false" title="Hide or show the graph (g)">Hide graph</button>
+    <button type="button" class="icon-btn" data-action="toggle-theme" aria-label="Toggle light and dark theme" title="Toggle theme (t)">
+      <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 3a7 7 0 0 1 0 14Z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<nav class="tabbar" aria-label="Panes">
+  <button type="button" class="tabbar__btn is-active" data-pane="graph">Graph</button>
+  <button type="button" class="tabbar__btn" data-pane="panel">Reading</button>
+</nav>
+
+<main class="layout" id="layout">
+  <section id="graph-pane" class="pane pane--graph" aria-label="Dependency graph">
+    <div class="graph-toolbar" role="toolbar" aria-label="Graph view">
+      <button type="button" class="graph-btn graph-btn--map" data-action="whole-map">Whole map</button>
+      <div class="segmented segmented--graph" role="group" aria-label="Which links to show" data-focus-controls hidden>
+        <button type="button" class="segmented__btn is-active" data-action="hops-1" aria-pressed="true">Direct links</button>
+        <button type="button" class="segmented__btn" data-action="hops-2" aria-pressed="false">One step further</button>
+      </div>
+      <p class="graph-hint" data-graph-hint>Click a result to read it and to see what it uses and what uses it. Click a section title to read the section.</p>
+    </div>
+
+    <div id="graph-viewport" class="graph-viewport" tabindex="0" aria-label="Dependency graph. Drag to pan, scroll to zoom; plus and minus keys zoom, 0 fits the view.">
+      <div id="graph-world" class="graph-world">
+        <svg id="graph-edges" class="graph-edges" aria-hidden="true">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1.5 9 5 1 8.5Z" fill="context-stroke"/></marker>
+            <marker id="arrow-hi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1.5 9 5 1 8.5Z" class="arrow-hi"/></marker>
+          </defs>
+          <g id="graph-edge-layer"></g>
+        </svg>
+        <div id="graph-nodes" class="graph-nodes"></div>
+      </div>
+    </div>
+
+    <div class="graph-zoom" role="toolbar" aria-label="Zoom" aria-orientation="vertical">
+      <button type="button" class="graph-btn graph-btn--icon" data-action="zoom-in" aria-label="Zoom in" title="Zoom in (+)">+</button>
+      <button type="button" class="graph-btn graph-btn--icon" data-action="zoom-out" aria-label="Zoom out" title="Zoom out (−)">−</button>
+      <button type="button" class="graph-btn graph-btn--icon" data-action="fit" aria-label="Fit the view" title="Fit the view (0)"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><rect x="4" y="4" width="8" height="8" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 .8v2.4M8 12.8v2.4M.8 8h2.4M12.8 8h2.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+      <button type="button" class="graph-btn graph-btn--icon" data-action="expand-graph" aria-pressed="false" aria-label="Expand the graph to the full width" title="Expand the graph (f)"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    </div>
+
+    <div class="graph-legend" id="graph-legend" aria-label="Legend"></div>
+  </section>
+
+  <div class="pane-divider" id="pane-divider" role="separator" tabindex="0" aria-orientation="vertical" aria-controls="panel" aria-label="Resize the reading panel (arrow keys; double-click to reset)" aria-valuemin="28" aria-valuemax="80" aria-valuenow="46"></div>
+
+  <section id="panel" class="pane pane--panel" aria-label="Reading panel" tabindex="-1">
+    <div id="panel-content" class="panel-content"></div>
+  </section>
+</main>
+
+<dialog id="lightbox" class="lightbox" aria-label="Figure">
+  <button type="button" class="lightbox__close icon-btn" data-action="lightbox-close" aria-label="Close">&times;</button>
+  <div class="lightbox__body"></div>
+</dialog>
+
+<script src="site/vendor/katex/katex.min.js"></script>
+<script src="site/data.js"></script>
+<script src="site/app.js"></script>
+</body>
+</html>

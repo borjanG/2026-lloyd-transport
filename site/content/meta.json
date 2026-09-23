@@ -1,0 +1,50 @@
+{
+  "title": "A Lloyd-stabilized Voronoï particle method",
+  "shortTitle": "Lloyd-stabilized Voronoï particle method",
+  "kicker": "Visual paper",
+  "authors": [
+    {
+      "name": "Bruno Després",
+      "affiliation": "Laboratoire Jacques-Louis Lions, Inria & Sorbonne Université"
+    },
+    {
+      "name": "Borjan Geshkovski",
+      "affiliation": "Laboratoire Jacques-Louis Lions, Inria & Sorbonne Université"
+    }
+  ],
+  "year": 2026,
+  "sourceVersion": "v7 (manuscript, September 2026)",
+  "repoUrl": "https://github.com/borjanG/2026-lloyd-transport",
+  "publicUrl": "https://borjang.github.io/2026-lloyd-transport/",
+  "pdfUrl": null,
+  "arxivId": null,
+  "leanReadmeUrl": "https://github.com/borjanG/2026-lloyd-transport/blob/main/lean/README.md",
+  "leanTargetsUrl": "https://github.com/borjanG/2026-lloyd-transport/blob/main/lean/TARGETS.md",
+  "leanStatusUrl": "https://github.com/borjanG/2026-lloyd-transport/blob/main/lean/STATUS.md",
+  "mainResult": "t.adaptive",
+  "startHere": [
+    "t.adaptive",
+    "t.w1",
+    "s.1"
+  ],
+  "movies": [
+    {
+      "id": "unstabilized",
+      "src": "vortex-unstabilized.mp4",
+      "poster": "media/vortex-unstabilized-end.png",
+      "title": "Without the Lloyd correction",
+      "caption": "Particles come together and many cells collapse."
+    },
+    {
+      "id": "stabilized",
+      "src": "vortex-stabilized.mp4",
+      "poster": "media/vortex-stabilized-end.png",
+      "title": "With the Lloyd correction",
+      "caption": "The mesh stays close to a centroidal Voronoï tessellation."
+    }
+  ],
+  "movieNoteTex": "The $31\\times31$-generator vortex computation of Figure~\\ref{fig:lloyd-summary}, from $t=0$ to $t=1$, computed with the method of \\cite{despres2024,desprem} on an initially Cartesian mesh. For display, particle positions are interpolated between the accepted time steps and the tessellation is rebuilt for every frame; the first and last frames are the recorded states.",
+  "bibtex": "@unpublished{despres2026lloyd,\n  title  = {A Lloyd-stabilized Vorono\\\"i particle method},\n  author = {Bruno Despr\\'es and Borjan Geshkovski},\n  year   = {2026},\n  note   = {Manuscript}\n}",
+  "funding": "This work received funding by Agence Nationale de la Recherche, program France 2030, reference ANR-23-PEIA-0004. BG's research was supported by a Sorbonne Emergences grant and a gift from Google.",
+  "editorialNote": "The summaries and proof ideas are editorial text written for this page with AI assistance, and are labelled as such wherever they appear; they are not part of the manuscript. Statements, proofs, captions and the bibliography are the paper's own text."
+}

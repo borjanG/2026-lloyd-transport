@@ -14,6 +14,26 @@
   </a>
 </p>
 
+## Visual paper
+
+An interactive companion to the manuscript is served from this repository at
+**<https://borjang.github.io/2026-lloyd-transport/>**: the dependency graph of
+the results, and for each result a plain-language summary, its exact statement
+and proof, what it uses and what uses it, together with the figures and the
+movies above.
+
+The page is static (`index.html` and `site/`). `site/data.js` is generated from
+the snapshot of the LaTeX source kept in `site/source/`:
+
+```sh
+python3 site/build.py            # regenerate site/data.js from site/source/v7.tex
+node site/tools/check-math.mjs   # every formula renders, every internal link resolves
+```
+
+Summaries, proof ideas, the graph edges and the Lean coverage notes live in
+`site/content/nodes.json`; title, authors and links in `site/content/meta.json`.
+To publish, enable GitHub Pages for the `main` branch with the folder `/ (root)`.
+
 ## Abstract
 
 *We study the stability and consistency of Lloyd's algorithm used in combination with the Lagrangian transport of a density on a Voronoï tessellation. We show that relaxation rates as strong as $O(h^{-1/2})$, where $h$ is the mesh size, give convergence to the continuity equation in Wasserstein distance at the rate $O(h^{1/4})$. Thus the mesh can be kept regular by the correction alone, without the remeshing that Lagrangian methods usually require. An application is proposed for the compressible Euler equations.*

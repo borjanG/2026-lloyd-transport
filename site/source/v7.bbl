@@ -1,0 +1,222 @@
+\begin{thebibliography}{10}
+
+\bibitem{alcalde2025attention}
+Albert Alcalde, Borjan Geshkovski, and Dom{\`e}nec Ruiz-Balet.
+\newblock Attention's forward pass and frank-wolfe.
+\newblock {\em arXiv preprint arXiv:2508.09628}, 2025.
+
+\bibitem{bouja}
+Francois Bouchut, Francois James, and Simona Mancini.
+\newblock Uniqueness and weak stability for multi-dimensional transport
+  equations with one-sided lipschitz coefficient.
+\newblock {\em Annali della Scuola Normale Superiore di Pisa}, 4(1):1--25,
+  2005.
+
+\bibitem{caglioti2018quantization}
+Emanuele Caglioti, Fran{\c{c}}ois Golse, and Mikaela Iacobelli.
+\newblock Quantization of measures and gradient flows: a perturbative approach
+  in the 2-dimensional case.
+\newblock {\em Annales de l'Institut Henri Poincar{\'e} C, Analyse non
+  lin{\'e}aire}, 35:1531--1555, 2018.
+
+\bibitem{caca}
+C.~Cances, T.~Gallou\"et, M.~Laborde, and L.~Monsaingeon.
+\newblock Simulation of multiphase porous media flows with minimising movement
+  and finite volume schemes.
+\newblock {\em European Journal of Applied Mathematics}, 30(6):1123--1152,
+  2019.
+
+\bibitem{Dafermos2016}
+Constantine~M. Dafermos.
+\newblock {\em Hyperbolic Conservation Laws in Continuum Physics}, volume 325
+  of {\em Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer, 4 edition, 2016.
+
+\bibitem{DECAMPOS2022114680}
+Paulo R.~Refachinho {de Campos}, Antonio~J. Gil, Chun~Hean Lee, Matteo
+  Giacomini, and Javier Bonet.
+\newblock A new updated reference lagrangian smooth particle hydrodynamics
+  algorithm for isothermal elasticity and elasto-plasticity.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  392:114680, 2022.
+
+\bibitem{DelarueLagoutiereVauchelet2017}
+Fran{\c c}ois Delarue, Fr{\'e}d{\'e}ric Lagouti{\`e}re, and Nicolas Vauchelet.
+\newblock Convergence order of upwind type schemes for transport equations with
+  discontinuous coefficients.
+\newblock {\em Journal de Math{\'e}matiques Pures et Appliqu{\'e}es},
+  108(6):918--951, 2017.
+
+\bibitem{despres2024}
+Bruno Despr\'es.
+\newblock {Compressible Lagrangian Voronoi meshes and particle dynamics with
+  shocks}.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  419:116648, 2024.
+
+\bibitem{desprem}
+Bruno Després and Ronald Remmerswaal.
+\newblock Remarks on a new particle method.
+\newblock {\em Journal of Computational Physics}, 523:113662, 2025.
+
+\bibitem{DEVILLERS1996315}
+O.~Devillers, M.~Golin, K.~Kedem, and S.~Schirra.
+\newblock Queries on voronoi diagrams of moving points.
+\newblock {\em Computational Geometry}, 6(5):315--327, 1996.
+\newblock Sixth Canadian Conference on Computational Geometry.
+
+\bibitem{DuFaberGunzburger1999}
+Qiang Du, Vance Faber, and Max Gunzburger.
+\newblock Centroidal {V}orono\"i tessellations: Applications and algorithms.
+\newblock {\em SIAM Review}, 41(4):637--676, 1999.
+
+\bibitem{DUQUE2023268}
+Daniel Duque.
+\newblock A unified derivation of voronoi, power, and finite-element lagrangian
+  computational fluid dynamics.
+\newblock {\em European Journal of Mechanics - B/Fluids}, 98:268--278, 2023.
+
+\bibitem{ElNmeirLuschgyPages2022}
+Rancy El~Nmeir, Harald Luschgy, and Gilles Pag{\`e}s.
+\newblock New approach to greedy vector quantization.
+\newblock {\em Bernoulli}, 28(1):424--452, 2022.
+
+\bibitem{PhysRevLett.83.1775}
+Eirik~G. Flekk\o{}y and Peter~V. Coveney.
+\newblock From molecular dynamics to dissipative particle dynamics.
+\newblock {\em Phys. Rev. Lett.}, 83:1775--1778, Aug 1999.
+
+\bibitem{GABURRO2020109167}
+Elena Gaburro, Walter Boscheri, Simone Chiocchetti, Christian Klingenberg,
+  Volker Springel, and Michael Dumbser.
+\newblock High order direct arbitrary-lagrangian-eulerian schemes on moving
+  voronoi meshes with topology changes.
+\newblock {\em Journal of Computational Physics}, 407:109167, 2020.
+
+\bibitem{GallouetMerigot2018}
+Thomas Gallou\"et and Quentin M\'erigot.
+\newblock A {L}agrangian scheme \`a la {B}renier for the incompressible {E}uler
+  equations.
+\newblock {\em Foundations of Computational Mathematics}, 18(4):835--865, 2018.
+
+\bibitem{gaga}
+Thomas~O Gallou{\"e}t, Quentin Merigot, and Andrea Natale.
+\newblock Convergence of a lagrangian discretization for barotropic fluids and
+  porous media flow.
+\newblock {\em SIAM Journal on Mathematical Analysis}, 54(3):2990--3018, 2022.
+
+\bibitem{geshkovski2023emergence}
+Borjan Geshkovski, Cyril Letrouit, Yury Polyanskiy, and Philippe Rigollet.
+\newblock The emergence of clusters in self-attention dynamics.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~36, 2023.
+
+\bibitem{geshkovski2025mathematical}
+Borjan Geshkovski, Cyril Letrouit, Yury Polyanskiy, and Philippe Rigollet.
+\newblock A mathematical perspective on transformers.
+\newblock {\em Bulletin of the American Mathematical Society}, 62(3):427--479,
+  2025.
+
+\bibitem{GrafLuschgy2000}
+Siegfried Graf and Harald Luschgy.
+\newblock {\em Foundations of Quantization for Probability Distributions},
+  volume 1730 of {\em Lecture Notes in Mathematics}.
+\newblock Springer, 2000.
+
+\bibitem{GrafLuschgyPages2012}
+Siegfried Graf, Harald Luschgy, and Gilles Pag{\`e}s.
+\newblock The local quantization behavior of absolutely continuous
+  probabilities.
+\newblock {\em The Annals of Probability}, 40(4):1795--1828, 2012.
+
+\bibitem{Gruber2004}
+Peter~M. Gruber.
+\newblock Optimum quantization and its applications.
+\newblock {\em Advances in Mathematics}, 186(2):456--497, 2004.
+
+\bibitem{kincl}
+Ondrej Kincl, Ilya Peshkov, and Walter Boscheri.
+\newblock Semi-implicit lagrangian voronoi approximation for the incompressible
+  navier--stokes equations.
+\newblock {\em International Journal for Numerical Methods in Fluids},
+  97(1):88--115, 2025.
+
+\bibitem{KriegSonnleitner2024}
+David Krieg and Mathias Sonnleitner.
+\newblock Random points are optimal for the approximation of {Sobolev}
+  functions.
+\newblock {\em IMA Journal of Numerical Analysis}, 44(3):1346--1371, 2024.
+
+\bibitem{LionsSeeger2024}
+Pierre-Louis Lions and Benjamin Seeger.
+\newblock Transport equations and flows with one-sided {Lipschitz} velocity
+  fields.
+\newblock {\em Archive for Rational Mechanics and Analysis}, 248(5):Paper
+  No.~86, 2024.
+
+\bibitem{Lloyd1982}
+Stuart~P. Lloyd.
+\newblock Least squares quantization in {PCM}.
+\newblock {\em IEEE Transactions on Information Theory}, 28(2):129--137, 1982.
+
+\bibitem{loulou}
+Raphaël Loubère, Pierre-Henri Maire, Mikhail Shashkov, Jérôme Breil, and
+  Stéphane Galera.
+\newblock Reale: A reconnection-based arbitrary-lagrangian–eulerian method.
+\newblock {\em Journal of Computational Physics}, 229(12):4724--4761, 2010.
+
+\bibitem{MacQueen1967}
+J.~B. MacQueen.
+\newblock Some methods for classification and analysis of multivariate
+  observations.
+\newblock In {\em Proceedings of the Fifth Berkeley Symposium on Mathematical
+  Statistics and Probability}, volume~1, pages 281--297, 1967.
+
+\bibitem{Majda1984}
+Andrew Majda.
+\newblock {\em Compressible Fluid Flow and Systems of Conservation Laws in
+  Several Space Variables}, volume~53 of {\em Applied Mathematical Sciences}.
+\newblock Springer, 1984.
+
+\bibitem{MerigotMirebeau2016}
+Quentin M\'erigot and Jean-Marie Mirebeau.
+\newblock Minimal geodesics along volume-preserving maps, through semidiscrete
+  optimal transport.
+\newblock {\em SIAM Journal on Numerical Analysis}, 54(6):3465--3492, 2016.
+
+\bibitem{pasta}
+J.R. Pasta and S.~Ulam.
+\newblock Heuristic numerical work in some problems of hydrodynamics.
+\newblock {\em Mathematical Tables and Other Aids to Computation}, 13:1--12,
+  1959.
+
+\bibitem{PoupaudRascle1997}
+Fran{\c c}ois Poupaud and Michel Rascle.
+\newblock Measure solutions to the linear multi-dimensional transport equation
+  with non-smooth coefficients.
+\newblock {\em Communications in Partial Differential Equations},
+  22(1--2):337--358, 1997.
+
+\bibitem{RUSSO199384}
+Giovanni Russo.
+\newblock A deterministic vortex method for the navier-stokes equations.
+\newblock {\em Journal of Computational Physics}, 108(1):84--94, 1993.
+
+\bibitem{shasha}
+Mikhail~Y. {Shashkov} and Andrey~V. {Solovjov}.
+\newblock {Numerical simulation of two-dimensional flows by the free-Lagrangian
+  method}, January 1991.
+
+\bibitem{Springel2010}
+Volker Springel.
+\newblock E pur si muove: {G}alilean-invariant cosmological hydrodynamical
+  simulations on a moving mesh.
+\newblock {\em Monthly Notices of the Royal Astronomical Society},
+  401(2):791--851, 2010.
+
+\bibitem{villani}
+C{\'e}dric Villani.
+\newblock {\em Optimal transport: old and new}, volume 338.
+\newblock Springer, 2009.
+
+\end{thebibliography}

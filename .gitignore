@@ -1,0 +1,8 @@
+# Lean dependencies and build outputs, including nested projects.
+.lake/
+
+# Temporary proof-audit files.
+Audit-*.lean
+
+# macOS metadata.
+.DS_Store

@@ -1,0 +1,1023 @@
+{
+  "kinds": {
+    "section": {
+      "label": "Section",
+      "legend": "Section",
+      "group": "section"
+    },
+    "theorem": {
+      "label": "Theorem",
+      "legend": "Theorem",
+      "group": "theorem"
+    },
+    "corollary": {
+      "label": "Corollary",
+      "legend": "Corollary / Proposition",
+      "group": "result"
+    },
+    "proposition": {
+      "label": "Proposition",
+      "legend": "Corollary / Proposition",
+      "group": "result"
+    },
+    "lemma": {
+      "label": "Lemma",
+      "legend": "Corollary / Proposition",
+      "group": "result"
+    },
+    "definition": {
+      "label": "Definition",
+      "legend": "Definition / setting",
+      "group": "definition"
+    },
+    "estimate": {
+      "label": "Estimate",
+      "legend": "Estimate",
+      "group": "estimate"
+    },
+    "remark": {
+      "label": "Remark",
+      "legend": "Remark / Example",
+      "group": "remark"
+    },
+    "example": {
+      "label": "Example",
+      "legend": "Remark / Example",
+      "group": "remark"
+    },
+    "figure": {
+      "label": "Figure",
+      "legend": "Figure / movie",
+      "group": "figure"
+    },
+    "external": {
+      "label": "External input",
+      "legend": "External input",
+      "group": "external"
+    }
+  },
+  "figureAssets": {
+    "fig:lloyd-summary": {
+      "images": [
+        {
+          "src": "site/figures/vortex-mesh-unstabilized.png",
+          "alt": "Voronoï mesh at t = 1 without the Lloyd correction: particles have come together and many cells are collapsed.",
+          "label": "Without correction"
+        },
+        {
+          "src": "site/figures/vortex-mesh-stabilized.png",
+          "alt": "Voronoï mesh at t = 1 with the Lloyd correction: the cells are regular and close to a centroidal tessellation.",
+          "label": "With correction"
+        }
+      ],
+      "arrow": "Lloyd",
+      "movies": true
+    },
+    "fig:1": {
+      "images": [
+        {
+          "src": "site/figures/sod-unstabilized.png",
+          "alt": "Three snapshots of the Voronoï mesh of the shock computation without Lloyd correction, at t = 0.0052, 0.081 and 0.1615; generators cluster near the shock in the last snapshot."
+        }
+      ]
+    },
+    "fig:2": {
+      "images": [
+        {
+          "src": "site/figures/sod-stabilized.png",
+          "alt": "Three snapshots of the Voronoï mesh of the shock computation with Lloyd correction, at t = 0.0052, 0.081 and 0.1625; generators stay separated."
+        }
+      ]
+    },
+    "fig:3": {
+      "images": [
+        {
+          "src": "site/figures/bifluid-profiles.svg",
+          "alt": "Pressure, velocity and density of the bi-fluid Riemann problem at the generators (green) against a fine-mesh reference solution (magenta)."
+        }
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "id": "s.1",
+      "kind": "section",
+      "sectionTitle": "Introduction",
+      "title": "Introduction",
+      "summaryTex": "Vorono\\\"i methods move a fluid as particles and use the Vorono\\\"i tessellation of the particles as a moving finite-volume mesh. Like all Lagrangian methods they suffer from mesh degeneration near shocks. The paper stabilizes the mesh with one step of Lloyd's algorithm per time step, that is, by pulling every particle towards the centroid of its cell, and asks how strong this correction may be without destroying the consistency of the method. The introduction fixes the setting (\\Secref{sec:moving}), the corrected scheme (\\Secref{sec:lloyd}), its continuous-time model \\eqref{eq:forced-lloyd-ode} (\\Secref{sec:continuous}), and the three geometric indicators $\\mathscr F$, $\\mathscr G$, $\\mathscr D$ on which the analysis rests (\\Secref{sec:contributions}).",
+      "children": [
+        "d.scheme",
+        "d.lloyd",
+        "f.vortex",
+        "d.ode",
+        "x.1d",
+        "d.indicators"
+      ],
+      "shortTitle": "Introduction"
+    },
+    {
+      "id": "d.scheme",
+      "kind": "definition",
+      "parent": "s.1",
+      "subsection": "sec:moving",
+      "title": "Lagrangian transport on a Voronoï tessellation",
+      "labels": [
+        "eq:rho-def",
+        "eq:lag-step-0",
+        "eq:rho-def-1"
+      ],
+      "extract": {
+        "from": "Throughout the paper $\\Omega$ is either",
+        "to": "\\rho_i^{k+1,-}:=\\frac{M_i}{|\\Omega_i^{k+1,-}|} >0. \\end{equation}"
+      },
+      "summaryTex": "The domain $\\Omega$ is a bounded convex Lipschitz domain of $\\R^2$ or a flat torus. At each discrete time, $N$ distinct particles generate a Vorono\\\"i tessellation; every cell carries a fixed mass $M_i$, so the density is the piecewise constant \\emph{Vorono\\\"i histogram} \\eqref{eq:rho-def}. A time step moves each particle with its velocity \\eqref{eq:lag-step-0} and recomputes the tessellation; the density is transported by rebuilding the histogram on the new cells \\eqref{eq:rho-def-1}. Nothing is remapped: the masses never change.",
+      "uses": [
+        "x.scheme"
+      ],
+      "shortTitle": "Lagrangian Voronoï transport"
+    },
+    {
+      "id": "d.lloyd",
+      "kind": "definition",
+      "parent": "s.1",
+      "subsection": "sec:lloyd",
+      "title": "The Lloyd correction",
+      "labels": [
+        "eq:lloyd-step"
+      ],
+      "extract": {
+        "from": "Let $c_i^{k+1,-}$ be the centroid of",
+        "to": "\\rho_i^{k+1}:=\\frac{M_i}{|\\Omega_i^{k+1}|}>0. \\]"
+      },
+      "summaryTex": "After the Lagrangian step, every particle is moved a fraction $\\eta_i^k\\in[0,1]$ of the way towards the centroid of its own cell, see \\eqref{eq:lloyd-step}. With $\\eta=1$ this is exactly one iteration of Lloyd's algorithm for centroidal Vorono\\\"i tessellations, which is also the update rule of $k$-means clustering. The method stays purely Lagrangian: the same particles carry the same masses, only their positions are corrected.",
+      "uses": [
+        "x.lloyd",
+        "d.scheme"
+      ],
+      "shortTitle": "The Lloyd correction"
+    },
+    {
+      "id": "f.vortex",
+      "kind": "figure",
+      "parent": "s.1",
+      "subsection": "sec:lloyd",
+      "labels": [
+        "fig:lloyd-summary"
+      ],
+      "title": "The vortex meshes, with movies",
+      "extract": {
+        "from": "There are many situations reported in the literature where the displacement",
+        "to": "Figure~\\ref{fig:lloyd-summary} shows the effect of this correction on a long computation."
+      },
+      "summaryTex": "The same long computation of a vortex solution of the compressible Euler equations, run with the Vorono\\\"i method of \\cite{despres2024,desprem} on an initially Cartesian $31\\times31$ mesh up to $t=1$. Without the correction the particles drift together and many cells collapse; with the correction the mesh stays close to a centroidal Vorono\\\"i tessellation throughout. The two movies show the full evolution from $t=0$ to $t=1$.",
+      "uses": [
+        "d.lloyd",
+        "x.scheme"
+      ],
+      "shortTitle": "Vortex meshes + movies",
+      "shortNumber": "Fig. 1.1"
+    },
+    {
+      "id": "d.ode",
+      "kind": "definition",
+      "parent": "s.1",
+      "subsection": "sec:continuous",
+      "title": "Continuous-time model",
+      "labels": [
+        "eq:forced-lloyd-ode"
+      ],
+      "extract": {
+        "from": "If the parameters in \\eqref{eq:lloyd-step} are scaled as",
+        "to": "We therefore regularize the physical advection by the Lloyd stabilizer in \\eqref{eq:forced-lloyd-ode}."
+      },
+      "summaryTex": "Scaling the Lloyd parameter as $\\eta_i^k=\\alpha(t^k)\\Delta t^k$ and letting $\\Delta t^k\\to0$ turns the split scheme into the system of ordinary differential equations \\eqref{eq:forced-lloyd-ode}: each particle follows its velocity plus a relaxation of rate $\\alpha(t)\\ge0$ towards the centroid of its cell. Everything proved in the paper concerns this system. The velocity $v_i^h$ may be the exact field evaluated at the particle (Sections~\\ref{sec:quasi-uniformity}--\\ref{subsec:adaptive-energy}) or the output of a finite-volume step (Theorem~\\ref{thm:W1-convergence}).",
+      "uses": [
+        "d.lloyd"
+      ],
+      "shortTitle": "Continuous-time model"
+    },
+    {
+      "id": "x.1d",
+      "kind": "remark",
+      "parent": "s.1",
+      "subsection": "sec:continuous",
+      "title": "One dimension: Lloyd is a discrete diffusion",
+      "extract": {
+        "from": "The smoothing effect of the correction is particularly transparent in one dimension.",
+        "to": "the former decay at rate $O(h^{-1})$ and the latter at rate $O(h)$."
+      },
+      "summaryTex": "On the circle, the centroid displacement $c_i-x_i$ is a quarter of the second finite difference of the positions, so the Lloyd term is a discrete Laplacian: it damps oscillations between neighbouring particles at rate $O(\\alpha)$ but smooth motion only at rate $O(\\alpha h^2)$. This explains the scaling that appears later: $\\alpha$ of order $h^{-1}$ (or even $h^{-1/2}$ in Theorem~\\ref{thm:adaptive-energy-convergence}) kills grid-scale noise quickly while barely touching the physical motion.",
+      "uses": [
+        "d.ode"
+      ],
+      "shortTitle": "1D: Lloyd is a discrete diffusion"
+    },
+    {
+      "id": "d.indicators",
+      "kind": "definition",
+      "parent": "s.1",
+      "subsection": "sec:contributions",
+      "title": "Three indicators: 𝓕, 𝓖, 𝓓",
+      "labels": [
+        "eq:energy-F",
+        "eq:energy-G",
+        "eq:energy-D"
+      ],
+      "extract": {
+        "from": "Our analysis is based on inequalities between three natural indicators",
+        "to": "Several of the difficulties we meet come down to obtaining good bounds on $t\\mapsto \\mathscr D(X(t))$."
+      },
+      "summaryTex": "Three numbers measure the quality of a tessellation generated by $X$. The energy $\\mathscr F(X)$ \\eqref{eq:energy-F} is the quantization energy of the particles, equivalently the semi-discrete optimal transport cost from the uniform measure to the particles; its gradient is $2V_i(x_i-c_i)$ (Proposition~\\ref{prop:env-gradient}), so the Lloyd displacement $c_i-x_i$ points along $-\\nabla_{x_i}\\mathscr F$: Lloyd's step is a volume-weighted gradient descent step for $\\mathscr F$. The modified energy $\\mathscr G(X)$ \\eqref{eq:energy-G} is the volume-weighted squared centroid displacement, that is, exactly the quantity dissipated by the Lloyd term. The characteristic length $\\mathscr D(X)$ \\eqref{eq:energy-D} is the largest cell diameter. The mesh is \\emph{quasi-uniform} when $\\mathscr D\\le Ch$ with $h=\\sqrt{|\\Omega|/N}$, which only forbids cells much larger than average.",
+      "uses": [
+        "x.cvt"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Geometry/Quantization.lean",
+          "note": "$\\mathscr F$ and $\\mathscr G$ are defined on the actual periodic cells of a flat torus, with the identification $\\mathscr F(X)=\\int_\\Omega\\min_i|x-x_i|^2\\,\\diff x$, the centroid bisector inequality and a configuration-independent bound on $\\mathscr G$."
+        },
+        {
+          "file": "lean/Lloyd/Geometry/FlatTorus.lean",
+          "note": "The flat torus for an arbitrary planar lattice basis, with its quotient distance."
+        }
+      ],
+      "shortTitle": "Three indicators 𝓕, 𝓖, 𝓓"
+    },
+    {
+      "id": "s.2",
+      "kind": "section",
+      "label": "sec:convergence",
+      "title": "Convergence of the Voronoï histogram",
+      "summaryTex": "The transport part of the analysis. For any solution of the Lloyd-corrected dynamics \\eqref{eq:forced-lloyd-ode}, the Wasserstein distance between the Vorono\\\"i histogram and the exact solution of the continuity equation is bounded by three quantities: the largest cell diameter, the accumulated velocity residual, and the accumulated Lloyd displacement $B_h$ (Theorem~\\ref{thm:W1-convergence}). Weak consistency follows by Kantorovich--Rubinstein duality (Corollary~\\ref{cor:weak-consistency}). No geometry of the cells beyond their diameters is needed here; producing that geometry is the task of Sections~\\ref{sec:quasi-uniformity} and~\\ref{subsec:adaptive-energy}.",
+      "children": [
+        "d.transport",
+        "t.w1",
+        "c.weak"
+      ],
+      "shortTitle": "Convergence of the histogram"
+    },
+    {
+      "id": "d.transport",
+      "kind": "definition",
+      "parent": "s.2",
+      "title": "Continuity equation and Wasserstein distance",
+      "labels": [
+        "eq:continuity"
+      ],
+      "extract": {
+        "from": "Up to \\Secref{sec:osl}, the velocity field is",
+        "to": "with first marginal $\\mu$ and second marginal $\\nu$."
+      },
+      "summaryTex": "Up to Section~\\ref{sec:osl} the velocity is Lipschitz in space and integrable in time, tangent to the boundary on a bounded domain; $L(t)$ is its Lipschitz constant and $\\Lambda(t)=\\int_0^tL$. The continuity equation \\eqref{eq:continuity} then has a unique weak solution, the push-forward of the initial measure by the flow of $v$. Discrete and exact densities are compared in the Wasserstein distance $W_1$, the minimal cost of moving one measure onto the other.",
+      "uses": [
+        "x.kr"
+      ],
+      "shortTitle": "Continuity equation and W₁"
+    },
+    {
+      "id": "t.w1",
+      "kind": "theorem",
+      "parent": "s.2",
+      "label": "thm:W1-convergence",
+      "title": "Wasserstein convergence of the Voronoï histogram",
+      "labels": [
+        "eq:lloyd_defect_weighted",
+        "eq:W1_conv_bound"
+      ],
+      "summaryTex": "Take any absolutely continuous solution of the Lloyd-corrected dynamics \\eqref{eq:forced-lloyd-ode} on $[0,T]$, with a nonnegative integrable rate $\\alpha$ and arbitrary discrete velocities $v_i^h$, as long as the particles stay distinct. Give each cell the mass of $\\rho_0$ it contains at time $0$ and build the Vorono\\\"i histogram $\\mu^h(t)$. Then \\eqref{eq:W1_conv_bound} bounds $W_1(\\mu^h(t),\\mu(t))$ by three terms: the largest cell diameter $d_h$ over $[0,T]$; the velocity residual $\\mathscr E_h$, which measures how far the discrete velocities are from $v$ at the particles; and the \\emph{Lloyd budget} $B_h(t)$ of \\eqref{eq:lloyd_defect_weighted}, the mass-weighted total displacement applied by the correction, with Gronwall weights $e^{\\Lambda(t)-\\Lambda(s)}$.\n\nConvergence therefore reduces to three requirements: cells shrink, velocities are consistent, and the total correction vanishes. The theorem asks nothing else of the geometry; in particular it does not need the cells to stay regular.",
+      "ideaTex": "Insert the atomic measure $\\nu^h(t)=\\sum_iM_i^h\\delta_{x_i^h(t)}$ between the histogram and the exact solution.\n\n\\emph{Histogram versus atoms.} Coupling each cell with its own generator costs at most the cell diameter, so $W_1(\\mu^h,\\nu^h)\\le Md_h$, see \\eqref{eq:mu_to_nu}.\n\n\\emph{Atoms versus exact solution.} Both $\\nu^h(t)$ and $\\mu(t)$ are push-forwards of their initial measures, by the discrete trajectories and by the flow $\\Phi$ of $v$. Any initial coupling $\\pi_0$ transported along the two motions is a coupling at time $t$, see \\eqref{eq:W1_coupling_bound}. Along a pair of trajectories, the distance obeys the differential inequality $\\frac{\\diff}{\\diff t}|X^h-\\Phi|\\le L|X^h-\\Phi|+|\\text{velocity residual}|+\\alpha|c_i-x_i|$, and Gronwall's lemma gives \\eqref{eq:gronwall_traj}. Integrating against $\\pi_0$ produces exactly $\\mathscr E_h$ and $B_h$, and optimizing over $\\pi_0$ gives \\eqref{eq:W1_nu_mu_opt}.\n\n\\emph{Initial error.} Because $M_i^h$ is the mass of $\\rho_0$ in the $i$-th cell, coupling each generator with the mass of its own cell gives $W_1(\\nu^h(0),\\mu(0))\\le Md_h$, see \\eqref{eq:initial_coupling}.",
+      "uses": [
+        "d.ode",
+        "d.transport",
+        "x.gronwall"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Transport/Coupling.lean",
+          "note": "The transport cost as an infimum over couplings, and the common-source coupling bound used in the proof. The histogram, the flow of $v$ and the Gronwall step of this theorem are not formalized."
+        }
+      ],
+      "shortTitle": "Wasserstein convergence of the histogram"
+    },
+    {
+      "id": "c.weak",
+      "kind": "corollary",
+      "parent": "s.2",
+      "label": "cor:weak-consistency",
+      "title": "Weak consistency with the continuity equation",
+      "summaryTex": "If the histogram converges to the exact solution in $W_1$, uniformly in time, then it satisfies the weak form of the continuity equation up to an error that tends to zero: for every test function $\\varphi$, the defect of the weak formulation is bounded by a constant times $W_1(\\mu^h(0),\\mu(0))+\\sup_tW_1(\\mu^h(t),\\mu(t))$. This is the sense in which the Lloyd-corrected scheme is consistent.",
+      "ideaTex": "Since $\\rho$ is an exact weak solution, the defect of $\\rho^h$ equals the same integrals applied to the difference $\\mu^h-\\mu$. The measures have equal mass, so Kantorovich--Rubinstein duality bounds $\\int f\\,\\diff(\\mu^h-\\mu)$ by $\\|\\nabla f\\|_{L^\\infty}W_1(\\mu^h,\\mu)$ for every Lipschitz $f$; apply it to $f=\\partial_t\\varphi+v\\cdot\\nabla\\varphi$ at each time and to $f=\\varphi(0,\\cdot)$.",
+      "uses": [
+        "t.w1",
+        "x.kr"
+      ],
+      "shortTitle": "Weak consistency"
+    },
+    {
+      "id": "s.3",
+      "kind": "section",
+      "label": "sec:quasi-uniformity",
+      "title": "Persistence of quasi-uniformity",
+      "summaryTex": "With the exact velocity, convergence reduces to two geometric questions: do the cell diameters tend to zero, and does the Lloyd budget $B_h(T)$ vanish? This section answers the first one. A feedback rate $\\alpha$, built from $\\|v\\|_{L^\\infty}$ and $\\mathscr G$, keeps the configuration inside a neighbourhood of the minimizers of $\\mathscr F$ for all time, hence quasi-uniform (Theorem~\\ref{thm:alpha-feedback}). Quantitative consequences follow: separation of the particles, lower bounds on cell volumes, a bound on the dissipation and a bound on $B_h$ in terms of the total correction $A_h$ (Corollary~\\ref{cor:mesh-bounds}). The section ends by explaining why this is not yet enough for convergence: $A_h$ is not controlled.",
+      "children": [
+        "d.exact",
+        "t.feedback",
+        "e.faces",
+        "d.H",
+        "c.mesh"
+      ],
+      "shortTitle": "Persistence of quasi-uniformity"
+    },
+    {
+      "id": "d.exact",
+      "kind": "definition",
+      "parent": "s.3",
+      "title": "Exact-velocity dynamics and the minimizers of 𝓕",
+      "labels": [
+        "eq:exact-ode"
+      ],
+      "extract": {
+        "from": "In this section we study \\eqref{eq:forced-lloyd-ode} with the exact velocity",
+        "to": "We simply assume that the minimizing set is nonempty and compact in $\\Omega^N$."
+      },
+      "summaryTex": "Sections~\\ref{sec:quasi-uniformity} and~\\ref{subsec:adaptive-energy} study \\eqref{eq:exact-ode}, the corrected dynamics driven by the exact velocity $v(t,x_i)$; this isolates the geometry of the mesh from the approximation of the velocity, which Theorem~\\ref{thm:W1-convergence} handles separately. Since $\\mathscr F(X)=\\int_\\Omega\\min_i|x-x_i|^2\\,\\diff x$, the energy extends continuously to $\\overline\\Omega^N$ and has minimizers, the optimal quantizers; the paper assumes that the set of minimizers in $\\Omega^N$ is nonempty and compact and does not study its geometry.",
+      "uses": [
+        "d.ode",
+        "d.indicators",
+        "x.cvt"
+      ],
+      "shortTitle": "Exact velocity, minimizers of 𝓕"
+    },
+    {
+      "id": "t.feedback",
+      "kind": "theorem",
+      "parent": "s.3",
+      "label": "thm:alpha-feedback",
+      "title": "A feedback that traps the mesh near optimal quantizers",
+      "labels": [
+        "eq:H"
+      ],
+      "summaryTex": "Let $\\mathcal M$ be the set of minimizers of $\\mathscr F$, assumed nonempty and compact, and let $\\mathcal U_r$ be its $r$-neighbourhood, assumed quasi-uniform with constant $C_1$, hypothesis \\eqref{eq:H}. Write $\\delta_r>0$ for the smallest energy excess $\\mathscr F-\\mathscr F^\\ast$ on the boundary of $\\mathcal U_r$. If the initial configuration lies in $\\mathcal U_r$ with energy excess below $\\delta_r$, then there is a nonnegative integrable rate $\\alpha(t)$ for which the corrected dynamics \\eqref{eq:exact-ode} stays in $\\mathcal U_r$ on the whole interval $[0,T]$. In particular the mesh remains quasi-uniform, $\\mathscr D(X(t))\\le C_1h$, whatever the velocity field does.\n\nThe rate is the feedback $\\alpha_\\varepsilon=\\sqrt{|\\Omega|}\\,\\|v(t,\\cdot)\\|_{L^\\infty}/\\sqrt{\\mathscr G(X)+\\varepsilon^2}$: it grows when the centroid displacements $\\mathscr G$ are small, and its size is dictated by how hard the velocity can push the energy up.",
+      "ideaTex": "\\emph{Energy balance.} By the envelope formula of Proposition~\\ref{prop:env-gradient}, along the dynamics $\\frac{\\diff}{\\diff t}\\mathscr F=\\mathscr T_v-2\\alpha\\mathscr G$, see \\eqref{eq:dFdt}: the velocity contributes the transport term $\\mathscr T_v$ and the Lloyd correction dissipates $2\\alpha\\mathscr G$.\n\n\\emph{Cauchy--Schwarz.} The transport term is at most $2\\sqrt{|\\Omega|}\\|v\\|_{L^\\infty}\\sqrt{\\mathscr G}$, see \\eqref{eq:T_bound_CS}. With the feedback $\\alpha_\\varepsilon$ this gives $\\frac{\\diff}{\\diff t}\\mathscr F\\le2\\sqrt{|\\Omega|}\\,\\varepsilon\\|v\\|_{L^\\infty}$, see \\eqref{eq:dFdt_eps}: the energy can only increase by an amount proportional to $\\varepsilon$ over $[0,T]$.\n\n\\emph{Trapping.} Choose $\\varepsilon$ so small that the initial excess plus this increase stays below $\\delta_r$, see \\eqref{eq:Ebar}. Reaching the boundary of $\\mathcal U_r$ would require excess at least $\\delta_r$, which is impossible, so the solution never leaves $\\mathcal U_r$, see \\eqref{eq:F_trapped}. Existence and uniqueness come from the local Lipschitz regularity of the centroids and of $\\mathscr G$ (Proposition~\\ref{prop:env-gradient}, Remark~\\ref{rem:lipschitz}), and the solution is continued to $T$ because it stays in the compact sublevel set $K$.\n\n\\emph{A second bound on $\\mathscr T_v$.} The proof also rewrites $\\mathscr T_v$ as a sum over the faces of the tessellation and uses \\eqref{eq:H} to get $|\\mathscr T_v|\\le C_2L(t)h^2$, see \\eqref{eq:T_bound_h2}. This is not needed for the trapping but is the input for Corollary~\\ref{cor:mesh-bounds}(iii).",
+      "uses": [
+        "d.exact",
+        "d.indicators",
+        "p.envelope",
+        "r.lipschitz",
+        "x.ode"
+      ],
+      "shortTitle": "Trapping near optimal quantizers"
+    },
+    {
+      "id": "e.faces",
+      "kind": "estimate",
+      "parent": "s.3",
+      "title": "Face representation of the transport term",
+      "labels": [
+        "eq:Tv_faces",
+        "eq:Tv_faces2",
+        "eq:v_faces",
+        "eq:T_bound_h2"
+      ],
+      "number": "Estimates (3.6)–(3.9)",
+      "extract": {
+        "from": "Second, we use \\eqref{eq:H}, which applies because",
+        "to": "where $C_2:=4\\pi C_1^4|\\Omega|+C_1^3|\\partial\\Omega|\\sqrt{|\\Omega|}$."
+      },
+      "noteTex": "These estimates are established inside the proof of Theorem~\\ref{thm:alpha-feedback}. They are recorded separately because \\eqref{eq:Tv_faces} is the starting point of the derivative-free argument of Appendix~\\ref{sec:appendix-osl}, and \\eqref{eq:T_bound_h2} is the input of Corollary~\\ref{cor:mesh-bounds}(iii).",
+      "summaryTex": "By the divergence theorem, $V_i(x_i-c_i)$ is a boundary integral of $|x-x_i|^2$ over the cell, so the transport term $\\mathscr T_v$ becomes a sum over the faces of the tessellation \\eqref{eq:Tv_faces}. On a face shared by two cells the two contributions combine into the velocity difference of the two generators \\eqref{eq:Tv_faces2}. Under quasi-uniformity \\eqref{eq:H}, neighbouring generators are $O(h)$ apart, so the velocity differences are $O(L(t)h)$, faces have total length $O(h)$ per cell, and summing over $N=|\\Omega|/h^2$ cells gives $|\\mathscr T_v(t)|\\le C_2L(t)h^2$ \\eqref{eq:T_bound_h2}, one order better than the Cauchy--Schwarz bound \\eqref{eq:T_bound_CS}.",
+      "uses": [
+        "x.divergence",
+        "d.indicators",
+        "d.exact"
+      ],
+      "shortTitle": "Face form of the transport term",
+      "shortNumber": "(3.6)–(3.9)"
+    },
+    {
+      "id": "d.H",
+      "kind": "remark",
+      "parent": "s.3",
+      "title": "Hypothesis (H) holds near optimal quantizers",
+      "number": "Remark after Theorem 3.1",
+      "extract": {
+        "from": "The hypothesis \\eqref{eq:H} holds for $r=O(h)$.",
+        "to": "so $\\mathscr D(X)\\le2(Ch+r)$ for $X\\in\\mathcal U_r$."
+      },
+      "summaryTex": "The quasi-uniformity hypothesis \\eqref{eq:H} is not an extra restriction when $r=O(h)$: optimal quantizers have covering radius $O(h)$ on a bounded convex domain \\cite{GrafLuschgyPages2012} and on a flat torus \\cite{Gruber2004}, moving generators by $r$ changes the covering radius by at most $r$, and a cell's diameter is at most twice the covering radius.",
+      "uses": [
+        "x.quantizers"
+      ],
+      "shortTitle": "(H) holds near optimal quantizers",
+      "shortNumber": "Remark"
+    },
+    {
+      "id": "c.mesh",
+      "kind": "corollary",
+      "parent": "s.3",
+      "label": "cor:mesh-bounds",
+      "title": "Separation, volume and budget bounds",
+      "labels": [
+        "eq:Bh-Lp",
+        "eq:cone"
+      ],
+      "summaryTex": "Under the assumptions of Theorem~\\ref{thm:alpha-feedback}, if the radius satisfies $r_h\\le C_3h$, the trapped configurations enjoy explicit bounds for all $t\\in[0,T]$: (i) the particles stay at distance at least $2C_3h$ from each other; (ii) every cell keeps volume at least $h^2/C_4$ and at least a fixed fraction of its initial volume; (iii) the dissipation $\\int_0^T\\alpha_h\\mathscr G\\,\\diff t$ is $O(h^2)$; (iv) if $\\rho_0\\in L^p$, the Lloyd budget satisfies $B_h(T)\\le C_5hA_h^{1/\\min\\{p,2\\}}$ with $A_h=\\int_0^T\\alpha_h$.\n\nSo the feedback of Theorem~\\ref{thm:alpha-feedback} gives quasi-uniformity in the strong, finite-element sense. But \\eqref{eq:Bh-Lp} only gives $B_h(T)\\to0$ if $A_h=o(h^{-\\min\\{p,2\\}})$, and nothing bounds $A_h$; this is why Section~\\ref{subsec:adaptive-energy} changes the feedback.",
+      "ideaTex": "\\emph{Minimizers are separated.} Take a minimizer and its two closest generators, at distance $\\delta$. Deleting one of them raises the energy by at most $\\pi C_1^2h^2\\delta(2C_1h+\\delta)$ \\eqref{eq:removal}, because only its cell is affected and the neighbour is $\\delta$ away. The $N$ balls of radius $h/\\sqrt{2\\pi}$ around the generators cover only half of $\\Omega$, so there is a hole; inserting the deleted generator in the hole lowers the energy by a fixed multiple of $h^4$ \\eqref{eq:insertion}, using the interior cone condition \\eqref{eq:cone}. Minimality forces $\\delta\\ge4C_3h$ \\eqref{eq:sep_min}.\n\n\\emph{(i), (ii).} A configuration within $r_h\\le C_3h$ of a minimizer inherits separation $2C_3h$, so the ball $B(x_i,C_3h)$ lies inside the $i$-th cell, which bounds the volume from below \\eqref{eq:vol_bounds}.\n\n\\emph{(iii).} Integrate the energy identity \\eqref{eq:dFdt} over $[0,T]$: the dissipation is bounded by the initial energy, $O(h^2)$, plus $\\int|\\mathscr T_v|$, which is $O(h^2)$ by the face estimate \\eqref{eq:T_bound_h2}.\n\n\\emph{(iv).} Write the mass-weighted displacement as $\\int\\rho^hD_h$ with $D_h$ the centroid displacement field, whose $L^2$ norm is $\\sqrt{\\mathscr G}$ and whose $L^\\infty$ norm is at most $C_1h$ \\eqref{eq:Dh}. The volume bounds and Jensen's inequality control $\\|\\rho^h(t)\\|_{L^p}$ by $\\|\\rho_0\\|_{L^p}$ \\eqref{eq:rho_Lp}; interpolation gives the $L^q$ norm of $D_h$ \\eqref{eq:rhoD}; H\\\"older in time against $\\alpha_h\\,\\diff t$ and (iii) finish the proof.",
+      "uses": [
+        "t.feedback",
+        "e.faces",
+        "t.w1"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Geometry/RemovalInsertion.lean",
+          "note": "The removal and insertion energy bounds \\eqref{eq:removal}--\\eqref{eq:insertion}, the hole from the union-of-balls argument, minimizer separation with exactly the printed constant $C_3$ of \\eqref{eq:sep_min}, and the perturbation, cell-volume and volume-ratio deductions of (i)--(ii). Radius and area bounds, integrability and the minimality comparison are explicit inputs."
+        }
+      ],
+      "shortTitle": "Separation, volume and budget bounds"
+    },
+    {
+      "id": "s.4",
+      "kind": "section",
+      "label": "subsec:adaptive-energy",
+      "title": "A more general feedback which retains consistency",
+      "summaryTex": "The main result. On a flat torus, any locally Lipschitz feedback with $0\\le\\alpha_h\\le\\mathscr G/h^{5/2}$, which allows relaxation rates as large as $O(h^{-1/2})$, keeps the particles distinct, the energy of order $h^2$, the cell diameters of order $h^{1/2}$ and the total correction $A_h$ of order $h^{-1/4}$; the Vorono\\\"i histogram then converges in Wasserstein distance at rate $h^{1/4}$ (Theorem~\\ref{thm:adaptive-energy-convergence}). The configuration is no longer kept near the minimizers of $\\mathscr F$: the energy may grow with the deformation caused by $v$, and the dissipation $\\int\\alpha_h\\mathscr G$ controls everything else. This is the regime of interest for numerical applications, since it means Lloyd's algorithm can replace remeshing without destroying consistency.",
+      "children": [
+        "d.periodic",
+        "t.adaptive",
+        "r.rate"
+      ],
+      "shortTitle": "General feedback, consistency kept"
+    },
+    {
+      "id": "d.periodic",
+      "kind": "definition",
+      "parent": "s.4",
+      "title": "Periodic cells and the admissible feedbacks",
+      "extract": {
+        "from": "We now allow any $\\alpha_h$ which is locally Lipschitz",
+        "to": "and the displacement $c_i-x_i$ does not depend on the choice of the representative $x_i$."
+      },
+      "summaryTex": "Two conventions for Section~\\ref{subsec:adaptive-energy}. The feedback may be any locally Lipschitz function of the configuration with $0\\le\\alpha_h(X)\\le\\mathscr G(X)/h^{5/2}$; since $\\mathscr G$ is typically of order $h^2$ this permits rates up to $O(h^{-1/2})$. The domain is a flat torus, and each cell is represented by the bounded convex polygon $P_i\\subset\\R^2$ of the periodic tessellation, whose volume and centroid displacement are those of the cell on the torus.",
+      "uses": [
+        "d.indicators",
+        "d.ode"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Geometry/PeriodicCell.lean",
+          "note": "Lifted cells are closed and convex and contain their integral centroids; the periodic bisector inequality \\eqref{eq:bisector}."
+        },
+        {
+          "file": "lean/Lloyd/Geometry/CellPartition.lean",
+          "note": "Bisectors have zero area, almost every point has a unique nearest site, and the chosen cells form a fundamental domain whose volumes sum to the area of the torus."
+        }
+      ],
+      "shortTitle": "Periodic cells, admissible feedbacks"
+    },
+    {
+      "id": "t.adaptive",
+      "kind": "theorem",
+      "parent": "s.4",
+      "label": "thm:adaptive-energy-convergence",
+      "title": "Consistency under strong feedback, rate h¼",
+      "labels": [
+        "eq:adaptive-initial-energy",
+        "eq:adaptive-energy-feedback",
+        "eq:adaptive-energy-dissipation",
+        "eq:adaptive-diameter",
+        "eq:adaptive-alpha-budget",
+        "eq:adaptive-centroid-error",
+        "eq:adaptive-transport-convergence"
+      ],
+      "summaryTex": "On a flat torus, start from any distinct configuration with energy $\\mathscr F(X^h(0))\\le C_1h^2$, for instance any quasi-uniform mesh, and run the corrected dynamics \\eqref{eq:adaptive-energy-feedback} with any locally Lipschitz feedback $0\\le\\alpha_h\\le\\mathscr G/h^{5/2}$. Then: the solution exists, is unique and the particles never collide; the energy stays $O(h^2)$ and the dissipation $\\int_0^T\\alpha_h\\mathscr G$ is $O(h^2)$ \\eqref{eq:adaptive-energy-dissipation}; the cell diameters are $O(h^{1/2})$ \\eqref{eq:adaptive-diameter}; the total correction $A_h=\\int_0^T\\alpha_h$ is $O(h^{-1/4})$ \\eqref{eq:adaptive-alpha-budget}; for the extreme choice $\\alpha_h=\\mathscr G/h^{5/2}$ the relative centroid error $\\mathscr G/h^2$ is small in $L^2(0,T)$ \\eqref{eq:adaptive-centroid-error}; and for every $\\rho_0\\in L^1$ the histogram converges to the solution of the continuity equation in $W_1$ at rate $h^{1/4}$, uniformly in time \\eqref{eq:adaptive-transport-convergence}.\n\nThe point is that a relaxation rate as strong as $O(h^{-1/2})$, far larger than the $O(1)$ rates one might expect, still preserves consistency, so the mesh can be kept regular by the correction alone.",
+      "ideaTex": "\\emph{No collisions.} For two generators and a lattice shift, $w=x_i-x_j-k$ satisfies $\\frac12\\frac{\\diff}{\\diff t}|w|^2\\ge-(L+\\overline\\alpha_h)|w|^2$: the velocity part is controlled by the Lipschitz bound, and the Lloyd part is repulsive, because the two centroids lie on the correct sides of the bisector \\eqref{eq:bisector}. Separation decays at most exponentially, so for fixed $h$ the solution exists on $[0,T]$ with distinct generators.\n\n\\emph{Energy inequality.} The energy identity $\\frac{\\diff}{\\diff t}\\mathscr F=\\mathscr T_v-2\\alpha_h\\mathscr G$ \\eqref{eq:adaptive-energy-identity} holds as before. Split $v(t,x_i)=(v(t,x_i)-v(t,y))+v(t,y)$: the first part is bounded by $2L\\mathscr F$ since $|y-x_i|$ is the distance to the nearest generator \\eqref{eq:Tv_part1}; the second is $-\\int\\nabla_yf\\cdot v$ with $f=\\min_j|y-x_j|^2$, which after integration by parts is $\\int f\\operatorname{div}v\\le2L\\mathscr F$ \\eqref{eq:Tv_part2}. Hence $\\frac{\\diff}{\\diff t}\\mathscr F+2\\alpha_h\\mathscr G\\le4L\\mathscr F$ \\eqref{eq:adaptive-global-energy-inequality}, and an integrating factor gives \\eqref{eq:adaptive-energy-dissipation}.\n\n\\emph{Diameters.} If $R(X)$ is the covering radius, the ball of radius $R/2$ around the farthest point has nearest-generator distance at least $R/2$, so $\\mathscr F\\ge\\frac{c_\\Omega}{16}R^4$ \\eqref{eq:F_vs_R}; with $\\mathscr F=O(h^2)$ this gives $R=O(h^{1/2})$, and cells have diameter at most $2R$ \\eqref{eq:adaptive-radius-displacement}.\n\n\\emph{Budget.} Since $\\alpha_h^2\\le h^{-5/2}\\alpha_h\\mathscr G$, Cauchy--Schwarz in time gives $A_h^2\\le Th^{-5/2}\\int\\alpha_h\\mathscr G=O(h^{-1/2})$ \\eqref{eq:alpha_squared}.\n\n\\emph{Convergence.} Apply Theorem~\\ref{thm:W1-convergence} with zero velocity residual: $B_h(T)\\le e^{\\Lambda(T)}Md_hA_h=O(h^{1/2}h^{-1/4})=O(h^{1/4})$, and the diameter term is $O(h^{1/2})$.",
+      "uses": [
+        "d.periodic",
+        "p.envelope",
+        "r.lipschitz",
+        "x.ode",
+        "x.gronwall",
+        "x.greedy",
+        "t.w1"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Analysis/ParticleDynamics.lean",
+          "note": "Centroid drift on the actual periodic cells, differentiation of the squared separation, the quantitative torus separation and non-collision for a given absolutely continuous solution, the identity $\\mathscr F'=\\mathscr T_v-2\\alpha\\mathscr G$, and $\\mathscr F'+2\\alpha\\mathscr G\\le4L\\mathscr F$ from the face estimate of Appendix~\\ref{sec:appendix-osl}. Existence and continuation of the solution are inputs."
+        },
+        {
+          "file": "lean/Lloyd/Analysis/Energy.lean",
+          "note": "The integrating-factor step behind \\eqref{eq:energy_bounds}, for an integrable time coefficient and an absolutely continuous energy."
+        },
+        {
+          "file": "lean/Lloyd/Analysis/FeedbackBudget.lean",
+          "note": "The budget bound \\eqref{eq:alpha_squared}--\\eqref{eq:adaptive-alpha-budget} from the dissipation bound, and the centroid estimate \\eqref{eq:adaptive-centroid-error} under the equality feedback."
+        },
+        {
+          "file": "lean/Lloyd/Geometry/TorusBalls.lean",
+          "note": "The ball-area lower bound on the actual torus and the fourth-power bound \\eqref{eq:F_vs_R}; small energy implies cell diameters of order $h^{1/2}$, with a constant independent of the configuration."
+        },
+        {
+          "file": "lean/Lloyd/Analysis/ConvergenceRate.lean",
+          "note": "The final $h^{1/4}$ calculation from the diameter and budget bounds, for scalar quantities with explicit comparison assumptions."
+        }
+      ],
+      "shortTitle": "Strong feedback, rate h¼"
+    },
+    {
+      "id": "r.rate",
+      "kind": "remark",
+      "parent": "s.4",
+      "env": "remark",
+      "nth": 1,
+      "title": "Where the rate is lost",
+      "summaryTex": "The exponent $1/4$ comes from the estimate $\\mathscr F\\ge c\\,R(X)^4$ \\eqref{eq:F_vs_R}, which converts the $O(h^2)$ energy bound into an $O(h^{1/2})$ diameter bound. That inequality holds for any Vorono\\\"i tessellation and uses nothing about Lloyd's algorithm, so the authors expect it, and hence the rate, to be suboptimal.",
+      "uses": [
+        "t.adaptive"
+      ],
+      "shortTitle": "Where the rate is lost"
+    },
+    {
+      "id": "s.5",
+      "kind": "section",
+      "label": "sec:osl",
+      "title": "One-sided Lipschitz velocities",
+      "summaryTex": "The Lipschitz assumption on $v$ is one of exposition. Under the one-sided Lipschitz condition \\eqref{eq:osl}, which bounds expansion but leaves compression free and is the natural setting for velocity fields with shocks, the Gronwall step of Theorem~\\ref{thm:W1-convergence}, the Cauchy--Schwarz bound of Theorem~\\ref{thm:alpha-feedback} and the energy inequality \\eqref{eq:adaptive-global-energy-inequality} all survive, the last one through a summation over faces instead of an integration by parts. What fails is the separation of the particles: an explicit compressive velocity makes two generators collide. Smoothing $v$ at scale $\\varepsilon$ restores everything at a cost $O(\\varepsilon^{1/2})$ in $W_1$, and $\\varepsilon=h$ keeps the rate $h^{1/4}$ \\eqref{eq:osl-convergence}. The computations are in Appendix~\\ref{sec:appendix-osl}.",
+      "children": [
+        "d.osl",
+        "t.osl"
+      ],
+      "shortTitle": "One-sided Lipschitz velocities"
+    },
+    {
+      "id": "d.osl",
+      "kind": "definition",
+      "parent": "s.5",
+      "title": "One-sided Lipschitz velocities",
+      "labels": [
+        "eq:osl"
+      ],
+      "extract": {
+        "from": "Let $\\Omega$ be a flat torus, and let $v\\in L^1((0,T);L^\\infty(\\Omega;\\R^2))$ be one-sided Lipschitz,",
+        "to": "for which we refer to \\cite{bouja,LionsSeeger2024,DelarueLagoutiereVauchelet2017}."
+      },
+      "summaryTex": "A bounded velocity field is one-sided Lipschitz when $(v(x)-v(y))\\cdot(x-y)\\le L|x-y|^2$ \\eqref{eq:osl}: it may compress arbitrarily fast but can only expand at a controlled rate. This is exactly what keeps the forward flow unique, in the Filippov sense when $v$ jumps, and the transported measure $\\Phi(t,\\cdot)_\\#\\mu(0)$ is the solution concept of Poupaud and Rascle \\cite{PoupaudRascle1997}.",
+      "uses": [
+        "x.filippov"
+      ],
+      "shortTitle": "One-sided Lipschitz velocities"
+    },
+    {
+      "id": "t.osl",
+      "kind": "estimate",
+      "parent": "s.5",
+      "title": "Convergence for one-sided Lipschitz velocities",
+      "labels": [
+        "eq:osl-convergence"
+      ],
+      "number": "Estimate (5.2)",
+      "extract": {
+        "from": "Three of our arguments use nothing beyond \\eqref{eq:osl}.",
+        "to": "so that $\\varepsilon(h)=h$ retains the rate $O(h^{1/4})$."
+      },
+      "summaryTex": "For a one-sided Lipschitz velocity on a flat torus, run the dynamics of Theorem~\\ref{thm:adaptive-energy-convergence} with the mollified velocity $v^\\varepsilon=\\eta_\\varepsilon*v$ and the feedback $\\alpha_h=\\mathscr G/h^{5/2}$. Then the histogram satisfies $\\sup_tW_1(\\mu^{h,\\varepsilon}(t),\\mu(t))\\le C\\|\\rho_0\\|_{L^1}(h^{1/4}+\\varepsilon^{1/2})$ \\eqref{eq:osl-convergence}, with constants independent of $\\varepsilon$; the choice $\\varepsilon=h$ gives back the rate $h^{1/4}$.",
+      "ideaTex": "Three arguments survive as they stand: the Gronwall comparison of trajectories, the Cauchy--Schwarz bound on $\\mathscr T_v$, and the energy inequality, once integration by parts is replaced by the face summation of Appendix~\\ref{sec:appendix-osl}. Separation does not survive: the collision example shows two generators meeting in finite time. Mollification repairs it: $v^\\varepsilon$ is Lipschitz, so Theorem~\\ref{thm:adaptive-energy-convergence} applies, and it satisfies \\eqref{eq:osl} with the same $L$, so the energy and transport bounds hold with constants independent of $\\varepsilon$. Finally the flows of $v$ and $v^\\varepsilon$ are $O(\\varepsilon^{1/2})$ apart, and the triangle inequality gives \\eqref{eq:osl-convergence}.",
+      "uses": [
+        "d.osl",
+        "t.w1",
+        "t.feedback",
+        "t.adaptive",
+        "e.face-osl",
+        "e.mollify",
+        "x.collision",
+        "r.lipschitz"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Geometry/PeriodicFaces.lean",
+          "note": "See the face identity of Appendix~\\ref{sec:appendix-osl}."
+        },
+        {
+          "file": "lean/Lloyd/Analysis/Mollification.lean",
+          "note": "See the mollification estimate of Appendix~\\ref{sec:appendix-osl}."
+        }
+      ],
+      "primary": true,
+      "shortTitle": "Convergence, one-sided Lipschitz",
+      "shortNumber": "(5.2)"
+    },
+    {
+      "id": "s.6",
+      "kind": "section",
+      "label": "sec:num",
+      "title": "A numerical illustration",
+      "summaryTex": "A shock-tube computation for the compressible Euler equations with the Vorono\\\"i method of \\cite{despres2024,desprem}. Without the correction, generators cluster at the shock until the construction of the tessellation becomes unstable (Figure~\\ref{fig:1}); with the correction they stay separated to the final time (Figure~\\ref{fig:2}). A bi-fluid version with two adiabatic exponents shows the three waves at the right positions, the two gases staying on their own side of the contact discontinuity, which a purely Lagrangian method guarantees and ALE methods cannot (Figure~\\ref{fig:3}). The velocity jumps across the shock, so this example is outside the hypotheses of Theorem~\\ref{thm:W1-convergence}.",
+      "children": [
+        "d.euler",
+        "f.sod"
+      ],
+      "shortTitle": "A numerical illustration"
+    },
+    {
+      "id": "d.euler",
+      "kind": "definition",
+      "parent": "s.6",
+      "title": "Compressible Euler equations and the shock-tube test",
+      "labels": [
+        "eq:mass",
+        "eq:mom",
+        "eq:energy"
+      ],
+      "extract": [
+        {
+          "from": "We illustrate the effect of the Lloyd correction on a standard test case",
+          "to": "see for instance \\cite{Majda1984,Dafermos2016}."
+        },
+        {
+          "from": "The scheme of \\cite{despres2024,desprem} is at the same time a particle method,",
+          "to": "which acts as an additional repulsive force between the particles."
+        }
+      ],
+      "summaryTex": "The Euler equations \\eqref{eq:mass}--\\eqref{eq:energy} for an ideal gas on the unit square with impermeable walls; the first equation is the continuity equation \\eqref{eq:continuity}. The scheme is a particle method and a finite-volume method at once: the tessellation is recomputed at every step and the velocities come from a Riemann solver. The test is a Riemann problem (a shock, a contact discontinuity and a rarefaction), whose strong gradients drive particles very close to one another; here Lloyd's step \\eqref{eq:lloyd-step} acts as a repulsive force in place of the ALE remeshing used elsewhere.",
+      "uses": [
+        "x.scheme",
+        "d.transport"
+      ],
+      "shortTitle": "Euler equations, shock-tube test"
+    },
+    {
+      "id": "f.sod",
+      "kind": "figure",
+      "parent": "s.6",
+      "labels": [
+        "fig:1",
+        "fig:2",
+        "fig:3"
+      ],
+      "title": "Shock computations with and without Lloyd",
+      "number": "Figures 6.1–6.3",
+      "extract": {
+        "from": "Figure~\\ref{fig:1} shows the Vorono\\\"i tessellation at the first recorded time",
+        "to": "This confirms that the Lloyd correction does not affect the consistency of the method."
+      },
+      "summaryTex": "Three snapshots of the mesh without (Figure~\\ref{fig:1}) and with (Figure~\\ref{fig:2}) the Lloyd correction, and the pressure, velocity and density profiles of the bi-fluid problem against a fine-mesh reference (Figure~\\ref{fig:3}). The only visible discrepancy is a wall-heating error in the density at the contact discontinuity.",
+      "uses": [
+        "d.euler",
+        "d.lloyd",
+        "x.scheme"
+      ],
+      "shortTitle": "Shock computations",
+      "shortNumber": "Figs. 6.1–6.3"
+    },
+    {
+      "id": "s.7",
+      "kind": "section",
+      "label": "sec:outlook",
+      "title": "Outlook",
+      "summaryTex": "Three directions: Laguerre cells, whose weights would let the mesh follow a strongly inhomogeneous density while keeping the semi-discrete transport structure; other repulsions than the centroid, and the energies of the same kind that appear in the mean-field description of Transformers; and the extension to $\\mathrm{BV}$ velocities. The section also records funding, the use of AI tools, and what has been formalized in Lean.",
+      "children": [],
+      "shortTitle": "Outlook"
+    },
+    {
+      "id": "s.A",
+      "kind": "section",
+      "label": "sec:appendix-envelope",
+      "title": "An envelope theorem for the gradient",
+      "summaryTex": "The regularity of the geometric quantities behind the whole analysis: the energy $\\mathscr F$ is $C^1$ away from collisions with gradient $2V_i(x_i-c_i)$ (Proposition~\\ref{prop:env-gradient}), and the cell volumes, centroids and $\\mathscr G$ are locally Lipschitz in the configuration, even when Vorono\\\"i neighbours change (Remark~\\ref{rem:lipschitz}). This version of the proof is due to Rapha\\\"el Berthier.",
+      "children": [
+        "p.envelope",
+        "r.lipschitz"
+      ],
+      "shortTitle": "Envelope theorem for the gradient"
+    },
+    {
+      "id": "p.envelope",
+      "kind": "proposition",
+      "parent": "s.A",
+      "label": "prop:env-gradient",
+      "title": "Gradient of the quantization energy",
+      "labels": [
+        "eq:env-gradient"
+      ],
+      "summaryTex": "On any open set of configurations with pairwise distinct generators, $\\mathscr F$ is continuously differentiable and $\\nabla_{x_i}\\mathscr F(X)=2V_i(X)\\,(x_i-c_i(X))$ \\eqref{eq:env-gradient}. In words: moving a generator changes the energy only through its own cell, as if the cell were frozen, and the Lloyd correction $c_i-x_i$ is a descent direction for $\\mathscr F$ weighted by the cell volume. This is what turns the Lloyd term into a dissipation of $\\mathscr G$ in the energy identities \\eqref{eq:dFdt} and \\eqref{eq:adaptive-energy-identity}.",
+      "ideaTex": "Write $\\mathscr F(X)=\\int_\\Omega\\min_i|x-x_i|^2\\,\\diff x$. Off the Vorono\\\"i skeleton, a set of measure zero, the minimum is attained at a single index, and by continuity the same index remains the minimizer for small perturbations of $X$. The difference quotients therefore converge pointwise to $2(x_{i(x)}-x)\\cdot h_{i(x)}$, and they are uniformly bounded since $\\Omega$ is bounded; dominated convergence gives the directional derivative, which is linear in the direction and continuous in $X$ because volumes and centroids are.",
+      "uses": [
+        "x.dominated",
+        "d.indicators"
+      ],
+      "shortTitle": "Gradient of the quantization energy"
+    },
+    {
+      "id": "r.lipschitz",
+      "kind": "remark",
+      "parent": "s.A",
+      "label": "rem:lipschitz",
+      "title": "Cells depend Lipschitz-continuously on the generators",
+      "summaryTex": "Cell volumes $V_i$ and first moments $V_ic_i$ are locally Lipschitz functions of the configuration, even across changes of Vorono\\\"i neighbours: each cell is an intersection of half-planes bounded by bisectors that move smoothly with the generators, so the symmetric difference of two cells has area $O(|X-X'|)$. Since volumes are positive away from collisions, the centroids and $\\mathscr G$ are locally Lipschitz too. This is what makes the right-hand sides of \\eqref{eq:feedback-ode} and \\eqref{eq:adaptive-energy-feedback} locally Lipschitz, hence the solutions unique.",
+      "uses": [
+        "d.indicators"
+      ],
+      "shortTitle": "Cells are Lipschitz in the generators"
+    },
+    {
+      "id": "s.B",
+      "kind": "section",
+      "label": "sec:appendix-osl",
+      "title": "Complements on one-sided Lipschitz velocities",
+      "summaryTex": "The computations behind Section~\\ref{sec:osl}. First, a derivative-free bound on the transport term: $\\mathscr T_v$ is a sum over faces of the periodic tessellation, each face pairing two generators to which \\eqref{eq:osl} applies, and the divergence theorem identifies the weights, $\\sum_\\Gamma d_\\Gamma\\int_\\Gamma f\\,\\diff s=4\\mathscr F$; hence $\\mathscr T_v\\le4L\\mathscr F$. Second, the collision example. Third, the mollification argument: $v^\\varepsilon=\\eta_\\varepsilon*v$ keeps the one-sided constant, and the flows of $v$ and $v^\\varepsilon$ are $O(\\varepsilon^{1/2})$ apart, which gives \\eqref{eq:osl-convergence}. Velocities at jumps are Filippov selections, which obey the same one-sided bound.",
+      "children": [
+        "e.face-osl",
+        "x.collision",
+        "e.mollify"
+      ],
+      "shortTitle": "One-sided Lipschitz complements"
+    },
+    {
+      "id": "e.face-osl",
+      "kind": "estimate",
+      "parent": "s.B",
+      "title": "Face identity and 𝓣ᵥ ≤ 4L𝓕 without derivatives",
+      "number": "Appendix B, face estimate",
+      "extract": {
+        "from": "Consider first the term $\\mathscr T_v$.",
+        "to": "and \\eqref{eq:adaptive-energy-identity} becomes \\eqref{eq:adaptive-global-energy-inequality} as before."
+      },
+      "summaryTex": "Starting from the face representation \\eqref{eq:Tv_faces}, each face $\\Gamma$ of the periodic tessellation separates two generators $x_i$ and $x_j+k$ at distance $d_\\Gamma$, and $\\mathscr T_v$ becomes $\\sum_\\Gamma d_\\Gamma^{-1}\\,(v_i-v_j)\\cdot(x_i-x_j-k)\\int_\\Gamma f$. The one-sided condition bounds each numerator by $L\\,d_\\Gamma^2$, and the divergence theorem, applied to $|y-x_i|^2(y-x_i)$ on each cell, identifies the weights: $\\sum_\\Gamma d_\\Gamma\\int_\\Gamma f\\,\\diff s=4\\mathscr F$. Hence $\\mathscr T_v\\le4L(t)\\mathscr F$, and the energy inequality \\eqref{eq:adaptive-global-energy-inequality} holds without any derivative of $v$.",
+      "uses": [
+        "e.faces",
+        "x.divergence",
+        "d.osl",
+        "d.periodic"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Geometry/PeriodicFaces.lean",
+          "note": "The bisector flux, both incidences of every face, the cancellation of the faces a cell shares with its own translates, the weighted identity $\\sum_\\Gamma d_\\Gamma J_\\Gamma=4\\mathscr F$ and the bound $\\mathscr T_v\\le4L\\mathscr F$. The finite face representation and the two local divergence formulas are inputs; the global identity and the bound are proved."
+        }
+      ],
+      "primary": true,
+      "shortTitle": "Face identity, 𝓣ᵥ ≤ 4L𝓕",
+      "shortNumber": "App. B"
+    },
+    {
+      "id": "x.collision",
+      "kind": "example",
+      "parent": "s.B",
+      "title": "A collision under a compressive velocity",
+      "number": "Appendix B, example",
+      "extract": {
+        "from": "The separation of the generators requires another argument.",
+        "to": "with $w=x_i-x_j-k$, which \\eqref{eq:osl} does not provide."
+      },
+      "summaryTex": "On the torus $(\\R/\\mathbb Z)^2$, the velocity $v=(2x-\\operatorname{sign}x,0)$ is one-sided Lipschitz with $L=2$ and compresses towards the origin. Two generators at $(\\pm s,0)$ keep the configuration symmetric, their cells are vertical strips with centroids $(\\pm1/4,0)$, and with $\\alpha_h=\\mathscr G/h^{5/2}$ the Lloyd repulsion is at most $2^{-19/4}$ while the drift towards the origin is of order one. The two particles collide in finite time: the Lloyd term is repulsive but cannot by itself prevent collisions when $v$ compresses faster than any Lipschitz field.",
+      "uses": [
+        "d.osl",
+        "d.periodic"
+      ],
+      "shortTitle": "A collision under a compressive velocity",
+      "shortNumber": "App. B"
+    },
+    {
+      "id": "e.mollify",
+      "kind": "estimate",
+      "parent": "s.B",
+      "title": "Mollification costs O(ε½)",
+      "number": "Appendix B, mollification estimate",
+      "extract": {
+        "from": "This difficulty can be avoided by regularizing the velocity in space",
+        "to": "applied to $v^\\varepsilon$, and the triangle inequality."
+      },
+      "summaryTex": "Let $v^\\varepsilon=\\eta_\\varepsilon*v$ with a symmetric mollifier supported in $B(0,\\varepsilon)$. Averaging \\eqref{eq:osl} shows that $v^\\varepsilon$ is one-sided Lipschitz with the same $L(t)$, and it is Lipschitz for each fixed $\\varepsilon$, so Theorem~\\ref{thm:adaptive-energy-convergence} applies to it, and with the face estimate in place of the integration by parts its constants do not depend on $\\varepsilon$. For the error $e=x^\\varepsilon-x$ between trajectories of $v^\\varepsilon$ and of $v$ from the same point, averaging \\eqref{eq:osl} against $\\eta_\\varepsilon$ makes the first-moment terms vanish and gives $\\frac12\\frac{\\diff}{\\diff t}|e|^2\\le L(|e|^2+\\varepsilon^2)+\\varepsilon\\|v\\|_{L^\\infty}$; Gronwall yields $\\sup_t|e|^2\\le2e^{2\\Lambda(T)}(\\varepsilon^2\\Lambda(T)+\\varepsilon V_T)$, and coupling the two flows by their common initial measure gives $W_1(\\mu^\\varepsilon(t),\\mu(t))\\le C\\|\\rho_0\\|_{L^1}\\varepsilon^{1/2}$.",
+      "uses": [
+        "d.osl",
+        "x.gronwall",
+        "x.kr"
+      ],
+      "lean": [
+        {
+          "file": "lean/Lloyd/Analysis/Mollification.lean",
+          "note": "The mollified velocity as a Bochner integral, the averaged one-sided inequality with cancellation of the first-moment terms, preservation of the one-sided constant, the comparison of absolutely continuous trajectories with the checked Gronwall calculation, the bound uniform in time, the $\\sqrt\\varepsilon$ rate, and the common-source transport bound on the actual torus. Existence and measurability of the flows and the one-sided property of Filippov selections are inputs."
+        }
+      ],
+      "shortTitle": "Mollification costs O(ε½)",
+      "shortNumber": "App. B"
+    },
+    {
+      "id": "x.gronwall",
+      "kind": "external",
+      "title": "Gronwall's lemma",
+      "summaryTex": "If $\\frac{\\diff}{\\diff t}u\\le L(t)u+g(t)$ with $L\\ge0$ integrable, then $u(t)\\le e^{\\Lambda(t)}u(0)+\\int_0^te^{\\Lambda(t)-\\Lambda(s)}g(s)\\,\\diff s$. Used to compare discrete and exact trajectories in Theorem~\\ref{thm:W1-convergence}, as an integrating factor in Theorem~\\ref{thm:adaptive-energy-convergence}, and for the mollification error in Appendix~\\ref{sec:appendix-osl}.",
+      "shortTitle": "Gronwall's lemma"
+    },
+    {
+      "id": "x.kr",
+      "kind": "external",
+      "title": "Wasserstein distance and Kantorovich–Rubinstein duality",
+      "cites": [
+        "villani"
+      ],
+      "summaryTex": "$W_1(\\mu,\\nu)$ is the least cost $\\int|x-y|\\,\\diff\\pi$ over couplings $\\pi$ of $\\mu$ and $\\nu$; any explicit coupling gives an upper bound, and push-forwards of a coupling by two maps couple the two push-forwards. For measures of equal mass, $W_1(\\mu,\\nu)=\\sup\\{\\int f\\,\\diff(\\mu-\\nu):\\ \\|\\nabla f\\|_{L^\\infty}\\le1\\}$.",
+      "shortTitle": "W₁ and Kantorovich–Rubinstein"
+    },
+    {
+      "id": "x.divergence",
+      "kind": "external",
+      "title": "Divergence theorem on polygonal cells",
+      "summaryTex": "For a convex polygon $P$ with outer normal $n$, $\\int_P\\operatorname{div}\\Psi\\,\\diff x=\\int_{\\partial P}\\Psi\\cdot n\\,\\diff s$. Applied to $\\Psi=\\tfrac12|x-x_i|^2\\,e$ for a fixed direction $e$, it turns $V_i(x_i-c_i)$ into a boundary integral \\eqref{eq:Tv_faces}; applied to $\\Psi=|y-x_i|^2(y-x_i)$, whose divergence is $4|y-x_i|^2$, it gives the face identity $\\sum_\\Gamma d_\\Gamma\\int_\\Gamma f\\,\\diff s=4\\mathscr F$ of Appendix~\\ref{sec:appendix-osl}.",
+      "shortTitle": "Divergence theorem"
+    },
+    {
+      "id": "x.dominated",
+      "kind": "external",
+      "title": "Dominated convergence",
+      "summaryTex": "Difference quotients that converge pointwise almost everywhere and are bounded by an integrable function may be integrated term by term. This is the only analytic input of Proposition~\\ref{prop:env-gradient}.",
+      "shortTitle": "Dominated convergence"
+    },
+    {
+      "id": "x.ode",
+      "kind": "external",
+      "title": "Carathéodory existence and uniqueness",
+      "summaryTex": "An ordinary differential equation $\\dot X=\\Psi(t,X)$ whose right-hand side is locally Lipschitz in $X$ and integrable in $t$ has a unique absolutely continuous solution on a maximal interval, and a solution that stays in a compact set can be continued. Used in Theorems~\\ref{thm:alpha-feedback} and~\\ref{thm:adaptive-energy-convergence}, where the Lipschitz regularity comes from Proposition~\\ref{prop:env-gradient} and Remark~\\ref{rem:lipschitz}.",
+      "shortTitle": "ODE existence and uniqueness"
+    },
+    {
+      "id": "x.quantizers",
+      "kind": "external",
+      "title": "Optimal quantizers have covering radius O(h)",
+      "cites": [
+        "GrafLuschgyPages2012",
+        "Gruber2004"
+      ],
+      "summaryTex": "Every minimizer $Y$ of $\\mathscr F$ satisfies $\\sup_{x\\in\\Omega}\\min_i|x-y_i|\\le Ch$ with $C$ independent of $h$: \\cite[Proposition~3.1]{GrafLuschgyPages2012} on a bounded convex domain and \\cite[Theorem~1(ii)]{Gruber2004} on a flat torus. This is what makes hypothesis \\eqref{eq:H} automatic for $r=O(h)$.",
+      "shortTitle": "Optimal quantizers: covering radius O(h)"
+    },
+    {
+      "id": "x.greedy",
+      "kind": "external",
+      "title": "Energy controls the covering radius",
+      "cites": [
+        "KriegSonnleitner2024",
+        "ElNmeirLuschgyPages2022"
+      ],
+      "summaryTex": "The argument bounding the covering radius $R(X)$ by the quantization energy, $\\mathscr F\\ge cR^4$ in two dimensions \\eqref{eq:F_vs_R}, is inspired by \\cite[Section~2.5]{KriegSonnleitner2024} and \\cite[proof of Proposition~2.1]{ElNmeirLuschgyPages2022}.",
+      "shortTitle": "Energy controls the covering radius"
+    },
+    {
+      "id": "x.filippov",
+      "kind": "external",
+      "title": "Filippov flows of one-sided Lipschitz fields",
+      "cites": [
+        "PoupaudRascle1997",
+        "bouja",
+        "LionsSeeger2024",
+        "DelarueLagoutiereVauchelet2017"
+      ],
+      "summaryTex": "For a bounded one-sided Lipschitz velocity, forward trajectories in the Filippov sense are unique, and transporting the initial measure along this flow is the notion of solution of the continuity equation proposed by Poupaud and Rascle \\cite{PoupaudRascle1997}; see also \\cite{bouja,LionsSeeger2024,DelarueLagoutiereVauchelet2017}.",
+      "shortTitle": "Filippov flows"
+    },
+    {
+      "id": "x.scheme",
+      "kind": "external",
+      "title": "The Lagrangian Voronoï scheme for compressible Euler",
+      "cites": [
+        "despres2024",
+        "desprem"
+      ],
+      "summaryTex": "The compressible Lagrangian Vorono\\\"i method of \\cite{despres2024,desprem}: a particle method whose Vorono\\\"i tessellation is recomputed at every step and serves as the finite-volume mesh, with velocities from a Riemann solver. It is the scheme the paper stabilizes and the one used in the computations of Figures~\\ref{fig:lloyd-summary} and~\\ref{fig:1}--\\ref{fig:3}.",
+      "shortTitle": "Voronoï scheme for compressible Euler"
+    },
+    {
+      "id": "x.lloyd",
+      "kind": "external",
+      "title": "Lloyd's algorithm and k-means",
+      "cites": [
+        "Lloyd1982",
+        "MacQueen1967"
+      ],
+      "summaryTex": "Lloyd's iteration \\cite{Lloyd1982} moves each generator to the centroid of its cell and recomputes the tessellation; it decreases the quantization energy and converges to centroidal Vorono\\\"i tessellations. It is also the update rule of $k$-means clustering \\cite{MacQueen1967}.",
+      "shortTitle": "Lloyd's algorithm and k-means"
+    },
+    {
+      "id": "x.cvt",
+      "kind": "external",
+      "title": "Optimal quantization and centroidal Voronoï tessellations",
+      "cites": [
+        "DuFaberGunzburger1999",
+        "GrafLuschgy2000",
+        "caglioti2018quantization",
+        "MerigotMirebeau2016",
+        "GallouetMerigot2018"
+      ],
+      "summaryTex": "The energy $\\mathscr F$ is the quantization energy of the particles and the semi-discrete optimal transport cost from the uniform measure to the particles; its global minimization is the theory of optimal quantization and centroidal Vorono\\\"i tessellations \\cite{DuFaberGunzburger1999,GrafLuschgy2000,caglioti2018quantization}. Semi-discrete transport on Vorono\\\"i and Laguerre cells also drives the Lagrangian schemes of \\cite{MerigotMirebeau2016,GallouetMerigot2018}, where the cost acts as a pressure rather than as a stabilizer.",
+      "shortTitle": "Optimal quantization and CVTs"
+    }
+  ],
+  "notation": [
+    {
+      "sym": "\\Omega",
+      "text": "The domain: a bounded convex Lipschitz domain of $\\R^2$, or a flat torus $\\R^2/\\mathcal L$ with period lattice $\\mathcal L=\\mathbb Z\\ell_1+\\mathbb Z\\ell_2$.",
+      "node": "d.scheme"
+    },
+    {
+      "sym": "X=(x_1,\\dots,x_N)",
+      "text": "A configuration of $N$ pairwise distinct particles (generators); $X^h(t)$ or $X(t)$ along the dynamics.",
+      "node": "d.scheme"
+    },
+    {
+      "sym": "\\Omega_i(X),\\ V_i(X),\\ c_i(X)",
+      "text": "The Vorono\\\"i cell of $x_i$, its volume and its centroid.",
+      "node": "d.scheme"
+    },
+    {
+      "sym": "h=\\sqrt{|\\Omega|/N}",
+      "text": "The mesh size; $h^2$ is the mean cell volume.",
+      "node": "d.indicators"
+    },
+    {
+      "sym": "M_i,\\ \\rho_i^k,\\ \\rho^h(t,\\cdot),\\ \\mu^h(t)",
+      "text": "Cell masses, cell densities $M_i/|\\Omega_i|$, the Vorono\\\"i histogram and the measure $\\rho^h\\,\\diff x$.",
+      "node": "d.scheme"
+    },
+    {
+      "sym": "\\eta_i^k,\\ \\alpha(t)",
+      "text": "The discrete Lloyd parameter in \\eqref{eq:lloyd-step} and the relaxation rate of the continuous model \\eqref{eq:forced-lloyd-ode}.",
+      "node": "d.ode"
+    },
+    {
+      "sym": "v,\\ L(t),\\ \\Lambda(t)",
+      "text": "The velocity field, its Lipschitz (or one-sided Lipschitz) constant at time $t$, and $\\Lambda(t)=\\int_0^tL(s)\\,\\diff s$.",
+      "node": "d.transport"
+    },
+    {
+      "sym": "\\mathscr F(X)",
+      "text": "The quantization energy \\eqref{eq:energy-F}, $\\sum_i\\int_{\\Omega_i}|x-x_i|^2\\,\\diff x=\\int_\\Omega\\min_i|x-x_i|^2\\,\\diff x$.",
+      "node": "d.indicators"
+    },
+    {
+      "sym": "\\mathscr G(X)",
+      "text": "The modified energy \\eqref{eq:energy-G}, $\\sum_iV_i|x_i-c_i|^2$; the quantity dissipated by the Lloyd term.",
+      "node": "d.indicators"
+    },
+    {
+      "sym": "\\mathscr D(X)",
+      "text": "The largest cell diameter \\eqref{eq:energy-D}; quasi-uniformity means $\\mathscr D\\le Ch$.",
+      "node": "d.indicators"
+    },
+    {
+      "sym": "\\mathscr T_v(t)",
+      "text": "The transport term $2\\sum_iV_i(x_i-c_i)\\cdot v(t,x_i)$ in the energy identity $\\frac{\\diff}{\\diff t}\\mathscr F=\\mathscr T_v-2\\alpha\\mathscr G$.",
+      "node": "t.feedback"
+    },
+    {
+      "sym": "W_1(\\mu,\\nu),\\ \\Pi(\\mu,\\nu)",
+      "text": "The Wasserstein distance and the set of couplings.",
+      "node": "d.transport"
+    },
+    {
+      "sym": "\\Phi(t,\\cdot),\\ \\mu(t)",
+      "text": "The flow of $v$ and the exact solution $\\mu(t)=\\Phi(t,\\cdot)_\\#\\mu(0)$ of the continuity equation \\eqref{eq:continuity}.",
+      "node": "d.transport"
+    },
+    {
+      "sym": "d_h,\\ \\mathscr E_h(t),\\ B_h(t),\\ A_h",
+      "text": "The largest cell diameter on $[0,T]$, the velocity residual, the Lloyd budget \\eqref{eq:lloyd_defect_weighted}, and the total correction $\\int_0^T\\alpha_h$.",
+      "node": "t.w1"
+    },
+    {
+      "sym": "\\mathscr F^\\ast,\\ \\mathcal M,\\ \\mathcal U_r,\\ \\delta_r",
+      "text": "The minimal energy, the set of minimizers, its $r$-neighbourhood, and the energy gap on the boundary of $\\mathcal U_r$.",
+      "node": "t.feedback"
+    },
+    {
+      "sym": "\\textup{(H)},\\ C_1",
+      "text": "Quasi-uniformity of $\\mathcal U_r$: $\\mathscr D(X)\\le C_1h$ for $X\\in\\mathcal U_r$.",
+      "node": "t.feedback"
+    },
+    {
+      "sym": "c_\\Omega",
+      "text": "The interior cone constant \\eqref{eq:cone}: $|B(z,s)\\cap\\Omega|\\ge c_\\Omega s^2$.",
+      "node": "c.mesh"
+    },
+    {
+      "sym": "P_i",
+      "text": "The lifted periodic cell of $x_i$ in $\\R^2$, a bounded convex polygon.",
+      "node": "d.periodic"
+    },
+    {
+      "sym": "R(X)",
+      "text": "The covering radius $\\max_y\\min_j|y-x_j|$.",
+      "node": "t.adaptive"
+    },
+    {
+      "sym": "\\Gamma,\\ d_\\Gamma,\\ n_\\Gamma",
+      "text": "A face of the periodic tessellation, the distance between the two generators it separates, and its unit normal.",
+      "node": "e.face-osl"
+    },
+    {
+      "sym": "K[v],\\ v^\\varepsilon,\\ V_T",
+      "text": "The Filippov set of $v$, the mollified velocity $\\eta_\\varepsilon*v$, and $\\int_0^T\\|v(t,\\cdot)\\|_{L^\\infty}\\,\\diff t$.",
+      "node": "e.mollify"
+    }
+  ]
+}
