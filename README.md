@@ -6,16 +6,16 @@
 **A Lloyd-stabilized Voronoï particle method** by Bruno Després and Borjan Geshkovski.
 
 <p align="center">
-  <a href="vortex-unstabilized.mp4">
-    <img src="media/vortex-unstabilized.gif" alt="Evolution of the unstabilized Voronoï mesh from t = 0 to t = 1" width="400"/>
+  <a href="media/extended-t1p5/vortex-unstabilized-t1p5.mp4">
+    <img src="media/extended-t1p5/vortex-unstabilized-t1p5.gif" alt="Evolution of the unstabilized Voronoï mesh from t = 0 to t = 1.5" width="400"/>
   </a>
-  <a href="vortex-stabilized.mp4">
-    <img src="media/vortex-stabilized.gif" alt="Evolution of the Lloyd-stabilized Voronoï mesh from t = 0 to t = 1" width="400"/>
+  <a href="media/extended-t1p5/vortex-stabilized-t1p5.mp4">
+    <img src="media/extended-t1p5/vortex-stabilized-t1p5.gif" alt="Evolution of the Lloyd-stabilized Voronoï mesh from t = 0 to t = 1.5" width="400"/>
   </a>
 </p>
 
-Longer runs to **t = 1.5**, using the same solver settings, are available as
-[MP4s and GIF previews](media/extended-t1p5/).
+Unstabilized (left) and Lloyd-stabilized (right), through **t = 1.5**.
+Click either preview for the full-resolution MP4.
 
 ## Visual paper
 
@@ -23,7 +23,7 @@ An interactive companion to the manuscript is served from this repository at
 **<https://borjang.github.io/2026-lloyd-transport/>**: the dependency graph of
 the results, and for each result a plain-language summary, its exact statement
 and proof, what it uses and what uses it, together with the figures and the
-movies above.
+original t = 1 movies.
 
 ## Abstract
 
