@@ -1,0 +1,180 @@
+{
+  "simulation_end_time": 1.5,
+  "final_hold_seconds": 2,
+  "variants": {
+    "unstabilized": {
+      "accepted_steps": 185,
+      "captured_states": 186,
+      "common_prefix_bitwise_equal": true,
+      "common_prefix_states": 122,
+      "common_prefix_fields": [
+        "times",
+        "iterations",
+        "generators",
+        "vor_points"
+      ],
+      "grid": [
+        31,
+        31
+      ],
+      "cfl": 0.7,
+      "parameters": {
+        "CAS_TEST": "2",
+        "MAILLAGE_INIT": "1",
+        "SIM_T": "1.5",
+        "APPLY_STABILIZED_LLOYD": "0",
+        "LLOYD_DEFECT_THRESHOLD": "0.20",
+        "LLOYD_GAIN": "0.08",
+        "LLOYD_POWER": "1.0",
+        "LLOYD_MAX_STEP": "0.04",
+        "LLOYD_SUBSTEPS": "1"
+      },
+      "solver_source_unchanged": true,
+      "versions": {
+        "numpy": "1.26.4",
+        "scipy": "1.11.4",
+        "matplotlib": "3.10.8"
+      },
+      "source_sha256": {
+        "MAIN_modul.py": "f01f6c25035117fffb0031c58615b39739a3a7ce2c6df0de6fcf3485c9906b30",
+        "PACKAGE/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "PACKAGE/design_new_vector.py": "5a6cac71c7b211fafd52ffd86527af9ca0bdda425d4eee44efd8a01a2b3cd2f0",
+        "PACKAGE/geom.py": "b7f948ca8d98fdba6e6799b03626dc234c60c539094851dafce6e98d9080f026",
+        "PACKAGE/grad_D.py": "e3dc57296d91da05a202501a7650070ed83eccd7dee609155e8b8e9bac453b27",
+        "PACKAGE/grad_p.py": "0833869a3cc8a59c3f281b245eb162662941ee04bcf2a9f50fc3d198ca31863e",
+        "PACKAGE/init.py": "1fcfd5fd920baf91cb8e3d3f186ee23027116e14259a35e7ea1bbae378b2f965",
+        "PACKAGE/init_ang.py": "8bb74c9fe6c4715073f8be0d0ac059f3fb94e27ba8bdb184c40d5799548410b1",
+        "PACKAGE/maillage.py": "4918d84d9bc6310915b6579652d8dc2814e75d83d97631ee58ef3dbf683ec687",
+        "PACKAGE/seuil.py": "8ee4f4fa19fe7e08c6973584998505453359e0fb97e6eefba96dfb9418be7a82"
+      },
+      "final_diagnostics": {
+        "time": 1.5,
+        "iteration": 185,
+        "all_fields_finite": true,
+        "min_pair_distance": 0.005035567205774903,
+        "density_min": 0.9319152272534195,
+        "density_max": 1.6506048377030924,
+        "volume_min": 0.000285622661022566,
+        "volume_max": 0.0011922877517366267,
+        "volume_sum": 1,
+        "mass_sum": 1,
+        "pressure_min": 1.083947027568863,
+        "internal_energy_min": 1.6447800500877667
+      },
+      "all_recorded_fields_finite": true,
+      "minimum_over_recorded_states": {
+        "density_min": 0.8976803038221646,
+        "volume_min": 0.0002777681016402134,
+        "pressure_min": 0.5,
+        "internal_energy_min": 1.2500000000000002
+      },
+      "max_mass_drift": 0,
+      "max_volume_error": 1.1102230246251565e-16,
+      "media": {
+        "mp4": {
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1080,
+          "pix_fmt": "yuv420p",
+          "duration": "17.033333",
+          "nb_read_frames": "511"
+        },
+        "gif": {
+          "codec_name": "gif",
+          "width": 420,
+          "height": 420,
+          "pix_fmt": "bgra",
+          "duration": "17.050000",
+          "nb_read_frames": "341"
+        }
+      }
+    },
+    "stabilized": {
+      "accepted_steps": 517,
+      "captured_states": 518,
+      "common_prefix_bitwise_equal": true,
+      "common_prefix_states": 307,
+      "common_prefix_fields": [
+        "times",
+        "iterations",
+        "generators",
+        "vor_points"
+      ],
+      "grid": [
+        31,
+        31
+      ],
+      "cfl": 0.7,
+      "parameters": {
+        "CAS_TEST": "2",
+        "MAILLAGE_INIT": "1",
+        "SIM_T": "1.5",
+        "APPLY_STABILIZED_LLOYD": "1",
+        "LLOYD_DEFECT_THRESHOLD": "0.20",
+        "LLOYD_GAIN": "0.08",
+        "LLOYD_POWER": "1.0",
+        "LLOYD_MAX_STEP": "0.04",
+        "LLOYD_SUBSTEPS": "1"
+      },
+      "solver_source_unchanged": true,
+      "versions": {
+        "numpy": "1.26.4",
+        "scipy": "1.11.4",
+        "matplotlib": "3.10.8"
+      },
+      "source_sha256": {
+        "MAIN_modul.py": "f01f6c25035117fffb0031c58615b39739a3a7ce2c6df0de6fcf3485c9906b30",
+        "PACKAGE/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "PACKAGE/design_new_vector.py": "5a6cac71c7b211fafd52ffd86527af9ca0bdda425d4eee44efd8a01a2b3cd2f0",
+        "PACKAGE/geom.py": "b7f948ca8d98fdba6e6799b03626dc234c60c539094851dafce6e98d9080f026",
+        "PACKAGE/grad_D.py": "e3dc57296d91da05a202501a7650070ed83eccd7dee609155e8b8e9bac453b27",
+        "PACKAGE/grad_p.py": "0833869a3cc8a59c3f281b245eb162662941ee04bcf2a9f50fc3d198ca31863e",
+        "PACKAGE/init.py": "1fcfd5fd920baf91cb8e3d3f186ee23027116e14259a35e7ea1bbae378b2f965",
+        "PACKAGE/init_ang.py": "8bb74c9fe6c4715073f8be0d0ac059f3fb94e27ba8bdb184c40d5799548410b1",
+        "PACKAGE/maillage.py": "4918d84d9bc6310915b6579652d8dc2814e75d83d97631ee58ef3dbf683ec687",
+        "PACKAGE/seuil.py": "8ee4f4fa19fe7e08c6973584998505453359e0fb97e6eefba96dfb9418be7a82"
+      },
+      "final_diagnostics": {
+        "time": 1.5,
+        "iteration": 517,
+        "all_fields_finite": true,
+        "min_pair_distance": 0.010181785979801468,
+        "density_min": 0.5875157110495309,
+        "density_max": 5.444096467209408,
+        "volume_min": 0.0002093474932296194,
+        "volume_max": 0.0013748399285616166,
+        "volume_sum": 1,
+        "mass_sum": 1.000000000000003,
+        "pressure_min": 0.018426952219751516,
+        "internal_energy_min": 0.015883725900351475
+      },
+      "all_recorded_fields_finite": true,
+      "minimum_over_recorded_states": {
+        "density_min": 0.5525976641897616,
+        "volume_min": 0.00008357502590630083,
+        "pressure_min": 0.003214880067110911,
+        "internal_energy_min": 0.0029472060865796124
+      },
+      "max_mass_drift": 4.218847493575595e-15,
+      "max_volume_error": 4.5968784334604607e-11,
+      "media": {
+        "mp4": {
+          "codec_name": "h264",
+          "width": 1080,
+          "height": 1080,
+          "pix_fmt": "yuv420p",
+          "duration": "17.033333",
+          "nb_read_frames": "511"
+        },
+        "gif": {
+          "codec_name": "gif",
+          "width": 420,
+          "height": 420,
+          "pix_fmt": "bgra",
+          "duration": "17.050000",
+          "nb_read_frames": "341"
+        }
+      }
+    }
+  }
+}
