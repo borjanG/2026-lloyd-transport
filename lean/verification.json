@@ -1,0 +1,667 @@
+{
+  "build": "passed",
+  "axiom_audit": "passed",
+  "theorem_count": 126,
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "theorem_axioms": {
+    "Lloyd.radius_le_mesh_sqrt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.diameter_mul_budget_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.transport_rate_of_comparison": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.ac_comp_lipschitzOn": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.ac_exp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.weighted_energy_inequality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.energy_and_dissipation_of_weighted": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.energy_dissipation_estimates": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.integral_sq_le_mass_mul_integral_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.feedback_sq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.integrable_feedback_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.feedback_budget_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.feedback_budget_mesh_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.feedback_budget_mesh": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.full_feedback_centroid_estimate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.shifted_osl_comparison": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.averaged_osl_comparison": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollifiedVelocity_osl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollifiedVelocity_osl_of_osl": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollified_error_derivative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.forced_squared_error_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollification_squared_error_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollified_trajectory_comparison": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollification_uniform_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollification_sqrt_rate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollification_transport_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mollification_torus_transport_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separation_drift_lower": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separation_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separation_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.ac_norm_sq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.lloydDrift_separation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.lloyd_squared_separation_derivative": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.lloyd_torus_separation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.lloyd_no_collision": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.lloyd_energy_substitution": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.lloyd_energy_from_faces": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.scalar_estimates_of_energy_inequality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.translated_cell_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.cellUnion_isFundamentalDomain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodicCells_aedisjoint": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.sum_periodicCell_volume": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.cellUnion_integral_eq_fundamentalDomain": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.ball_subset_voronoiCell_of_separated": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.voronoiCell_subset_closedBall": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.isCompact_voronoiCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.voronoiCell_measure_properties": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.dist_eq_dist_iff_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.bisectorAffine_ne_top": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.measure_bisector_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.ae_no_distance_ties": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodic_index_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.ae_unique_periodic_cell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.dist_eq_infDist_of_mem_voronoiCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.voronoiCell_diam_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.half_radius_le_infDist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.quantizationEnergy_ge_ball": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.quantizationEnergy_ge_radius_fourth": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torusProjection_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torusProjection_eq_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torusProjection_add_lattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torus_dist_eq_infDist_lattice": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torusProjection_dist_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torus_dist_realized": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torus_infDist_eq_periodic": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torusMeasure_univ": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torusMeasure_univ_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.closed_discrete_iUnion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.exists_separation_of_closed_discrete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodicSites_closed_discrete": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodicSites_covering_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodicCell_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodicCell_measure_properties": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.dist_le_dist_iff_inner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.convex_voronoiCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.isClosed_voronoiCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.bisector_inner_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.mem_periodicCell_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.generator_mem_periodicCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodic_bisector_inner_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.cellCentroid_mem_voronoiCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.cellCentroid_displacement_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.bisector_radial_component": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.reversed_face_normal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.faceSpacing_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.faceWeight_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.faceRadialFlux_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.sum_face_incidents_by_owner": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.faceVelocityFlux_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodic_face_osl_from_velocity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.self_face_transport_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodic_weighted_face_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodic_face_osl_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.cellUnion_isCompact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodicCell_centroid_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodicCell_centroid_displacement_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.torus_quantization_integrable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.cellEnergy_eq_torus_quantization": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.sum_periodicCell_real_volume": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.centroidDissipation_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.centroidDissipation_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.periodic_centroid_bisector": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.capped_feedback_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.infDist_insert_site": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.removal_cell_eq_voronoiCell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.removal_cost_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.insertion_gain_pointwise": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.quantization_removal_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.quantization_insertion_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.minimizer_swap_inequality": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separation_from_swap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.minimizer_mesh_separation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.paper_minimizer_separation_constant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separation_under_perturbation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separated_ball_subset_cell": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separated_cell_volume": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.separated_cell_volume_ratio": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.exists_hole_of_ball_volume": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.euclidean_ball_volume_le_torus_ball": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.exists_torus_ball_volume_lower_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.exists_cellEnergy_radius_fourth_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.exists_periodicCell_diameter_mesh_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.wassersteinOne_le_cost": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.wassersteinOne_maps_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.wassersteinOne_maps_le_mass_mul": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Lloyd.wassersteinOne_quantize_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "source_sha256": {
+    "Lloyd/Analysis/ConvergenceRate.lean": "9766501f0a290538d643ac719c1c0b0e8412a1584ba5d7500839c833e9a80be5",
+    "Lloyd/Analysis/Energy.lean": "2c232d4111ea3d21449c642d585a2f7b7d86e4295c00bc30e7044a706d6924a8",
+    "Lloyd/Analysis/FeedbackBudget.lean": "f2a071b47570240bc607a8d58f24f6ac4702e792ffb67b21d102d3413279610c",
+    "Lloyd/Analysis/Mollification.lean": "eb84cb75eec98a28a43d9ca9a34f988eb13d9c230d783ad0fa57bb775429e11c",
+    "Lloyd/Analysis/Noncollision.lean": "020ab7b221bdb15dd71b1fb48d5f49226bc71e88fd4fccd7344922d869313a60",
+    "Lloyd/Analysis/ParticleDynamics.lean": "5c89d5a0616b4ef289c8a82d493551ac46bc37954b672bc96fb12018c333c38c",
+    "Lloyd/Analysis/ScalarEstimates.lean": "b1df37bef5d27e2c3570e0e2d053e5ea46470b2a65c13de0023f85c0e7f07567",
+    "Lloyd/Geometry/CellFundamentalDomain.lean": "cac02fe848f03e7a51da91052bd97bbc572567acd604a9ef6237ca4cecf24685",
+    "Lloyd/Geometry/CellMeasure.lean": "b90a869730df2ab8460d67096456b083caf6c9b559bfdb096e7786a5525e69c5",
+    "Lloyd/Geometry/CellPartition.lean": "3edfad3ec9392eb222ca7246cdf04eab3270e23a47f78f3239ef0bae6944a499",
+    "Lloyd/Geometry/CoveringRadius.lean": "6d3c8ab06637bfc6a307ec9daad90176770544c518d6b740e0e7f06092ca2665",
+    "Lloyd/Geometry/FlatTorus.lean": "54c8b02ec02fe3c00dd71a802e63c9a9c9ac721e3dcb02a390d8abdf51802909",
+    "Lloyd/Geometry/LatticeGeometry.lean": "465e22c66ebf933890fd9b2406bb95656008df34a3551d9a633fefd838752844",
+    "Lloyd/Geometry/PeriodicCell.lean": "c4d73485256e0ea66c4ed9d4d6c82287301a40c43833ac801e1a0be39ecf8532",
+    "Lloyd/Geometry/PeriodicFaces.lean": "63d24b52d5dd8d30def88928271b28ebbd8696685b49d15280aee62b7e4a083e",
+    "Lloyd/Geometry/Quantization.lean": "ad3fd6ab0a648ea3e00344723c0177b4b76cafa3066fcbc0169721a9b0e78ac1",
+    "Lloyd/Geometry/RemovalInsertion.lean": "5ec99e33ac6b4f950c8e45bd26300962ff2dc3f7dc8e853fbd39cf34753aa4ec",
+    "Lloyd/Geometry/TorusBalls.lean": "e4b2fe0055347bd72e5423e72eb9e22edd64755f6b797809a31604fe36c5f062",
+    "Lloyd/Transport/Coupling.lean": "a0f4a0b679c6290e4c257232752b8e3193aaf4648a08e27f38d20191cf25fce2",
+    "Lloyd.lean": "547f8be1d5068b006cae5e44e4522e0a20229575078bf5e6d0df67461956ec19",
+    "lakefile.toml": "b8201751d5c05f0e0a74611f7370df10775fcfa5857cd6e4fe5ce267049ca647",
+    "lake-manifest.json": "82db94c555e6afe9f79fd33315ef55750ba28889c023afbc96834c34f0185c75",
+    "lean-toolchain": "651c8accb402b0c071cd336e9d3dc0a55516b1bfb434ddc4801f14936785b1d2"
+  }
+}

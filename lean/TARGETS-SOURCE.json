@@ -1,0 +1,18 @@
+{
+  "targets": [
+    "Section 5 / Appendix B: periodic face estimate",
+    "Section 3: removal/insertion separation and volumes",
+    "Section 4: centroid drift, noncollision and energy",
+    "Section 5 / Appendix B: mollification and transport error"
+  ],
+  "scope": "Targeted conditional verification; not an end-to-end proof of Theorem 4.1 or its OSL extension",
+  "recorded_at_utc": "2026-09-22T14:59:06.862013+00:00",
+  "reviewed_source": {
+    "path": "../TOUT/v7.tex",
+    "sha256": "93d19fc674b47c439685df4e029f8bfa92d6e8029a56c6f70d319e42d232b65c",
+    "matches_current_manuscript": true
+  },
+  "original_project_source_record": "SOURCE.json",
+  "initial_source_sha256": "3dac5bed276a0409896dc3fdf10301748974dcb465eb8caa8221a07acc089fbe",
+  "changes_reviewed": "Compared the source changes during this pass: exposition and explicit [0,T] time-supremum notation. The four targeted mathematical estimates are unchanged."
+}
