@@ -14,6 +14,9 @@
   </a>
 </p>
 
+Longer runs to **t = 1.5**, using the same solver settings, are available as
+[MP4s and GIF previews](media/extended-t1p5/).
+
 ## Visual paper
 
 An interactive companion to the manuscript is served from this repository at
@@ -21,18 +24,6 @@ An interactive companion to the manuscript is served from this repository at
 the results, and for each result a plain-language summary, its exact statement
 and proof, what it uses and what uses it, together with the figures and the
 movies above.
-
-The page is static (`index.html` and `site/`). `site/data.js` is generated from
-the snapshot of the LaTeX source kept in `site/source/`:
-
-```sh
-python3 site/build.py            # regenerate site/data.js from site/source/v7.tex
-node site/tools/check-math.mjs   # every formula renders, every internal link resolves
-```
-
-Summaries, proof ideas, the graph edges and the Lean coverage notes live in
-`site/content/nodes.json`; title, authors and links in `site/content/meta.json`.
-To publish, enable GitHub Pages for the `main` branch with the folder `/ (root)`.
 
 ## Abstract
 

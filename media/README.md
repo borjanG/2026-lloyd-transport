@@ -19,3 +19,11 @@ Voronoi mesh is reconstructed for each display frame. These intermediate display
 frames are visual interpolation, not extra solver steps. The initial and final
 frames use the exact recorded positions; both final numerical states have been
 checked against the saved Figure 1 data.
+
+## Longer runs
+
+Both variants are also available through **t = 1.5** in
+[extended-t1p5](extended-t1p5/), with MP4s, GIF previews, final-frame PNGs, and
+verification details. They use the same solver settings and preserve the
+original playback speed, with a two-second hold on the final frame. The
+original t = 1 movies above are unchanged.
