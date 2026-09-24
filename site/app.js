@@ -549,6 +549,7 @@
       <div class="section-label">Cite</div>
       <pre class="bibtex">${esc(META.bibtex)}<button type="button" class="btn btn--small bibtex__copy" data-action="copy-bibtex">Copy</button></pre>
       <div class="welcome__foot">
+        <p>We were inspired by <a href="https://scottnarmstrong.github.io/hcp-visual-paper/" target="_blank" rel="noopener">this visual paper</a> when building this interactive page.</p>
         <p>© ${esc(META.year)} ${authors}. ${esc(META.funding || "")}</p>
         <p>${esc(META.editorialNote || "")}</p>
         <p>Built from the manuscript source with <code>site/build.py</code>; the site and the Lean project live at <a href="${esc(META.repoUrl)}" target="_blank" rel="noopener">${esc(META.repoUrl.replace("https://", ""))}</a>. Mathematics rendered with <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a> (MIT).</p>
