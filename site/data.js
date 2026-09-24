@@ -15,11 +15,10 @@ window.PAPER = {
    }
   ],
   "year": 2026,
-  "sourceVersion": "v7 (manuscript, September 2026)",
   "repoUrl": "https://github.com/borjanG/2026-lloyd-transport",
   "publicUrl": "https://borjang.github.io/2026-lloyd-transport/",
-  "pdfUrl": null,
-  "arxivId": null,
+  "pdfUrl": "https://arxiv.org/pdf/2609.28135",
+  "arxivId": "2609.28135",
   "leanReadmeUrl": "https://github.com/borjanG/2026-lloyd-transport/blob/main/lean/README.md",
   "leanTargetsUrl": "https://github.com/borjanG/2026-lloyd-transport/blob/main/lean/TARGETS.md",
   "leanStatusUrl": "https://github.com/borjanG/2026-lloyd-transport/blob/main/lean/STATUS.md",
@@ -45,7 +44,7 @@ window.PAPER = {
     "caption": "The mesh stays close to a centroidal Voronoï tessellation."
    }
   ],
-  "bibtex": "@unpublished{despres2026lloyd,\n  title  = {A Lloyd-stabilized Vorono\\\"i particle method},\n  author = {Bruno Despr\\'es and Borjan Geshkovski},\n  year   = {2026},\n  note   = {Manuscript}\n}",
+  "bibtex": "@misc{despres2026lloyd,\n  title={A Lloyd-stabilized Voronoi particle method},\n  author={Bruno Despr{\\'e}s and Borjan Geshkovski},\n  year={2026},\n  eprint={2609.28135},\n  archivePrefix={arXiv},\n  primaryClass={math.NA},\n  url={https://arxiv.org/abs/2609.28135}\n}",
   "funding": "This work received funding by Agence Nationale de la Recherche, program France 2030, reference ANR-23-PEIA-0004. BG's research was supported by a Sorbonne Emergences grant and a gift from Google.",
   "editorialNote": "The summaries and proof ideas are editorial text written for this page with AI assistance, and are labelled as such wherever they appear; they are not part of the manuscript. Statements, proofs, captions and the bibliography are the paper's own text.",
   "abstractHtml": "<p>We study the stability and consistency of Lloyd’s algorithm used in combination with the Lagrangian transport of a density on a Voronoï tessellation. We show that relaxation rates as strong as <span class=\"math\" data-tex=\"O(h^{-1/2})\"></span>, where <span class=\"math\" data-tex=\"h\"></span> is the mesh size, give convergence to the continuity equation in Wasserstein distance at the rate <span class=\"math\" data-tex=\"O(h^{1/4})\"></span>. Thus the mesh can be kept regular by the correction alone, without the remeshing that Lagrangian methods usually require. An application is proposed for the compressible Euler equations.</p>",

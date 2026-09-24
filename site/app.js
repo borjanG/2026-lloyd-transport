@@ -427,7 +427,7 @@
   }
   function sourceLine(n) {
     if (!n.sourceLine) return "";
-    return `<p class="source-line">Source: <a href="${esc(META.repoUrl)}/blob/main/site/source/v7.tex#L${n.sourceLine}" target="_blank" rel="noopener">v7.tex, line ${n.sourceLine}</a>.</p>`;
+    return `<p class="source-line">Source: <a href="${esc(META.repoUrl)}/blob/main/site/source/v7.tex#L${n.sourceLine}" target="_blank" rel="noopener">manuscript source, line ${n.sourceLine}</a>.</p>`;
   }
 
   function movieArrow(label) {
@@ -522,13 +522,18 @@
   function renderWelcome() {
     const authors = META.authors.map((a) => esc(a.name)).join(" and ");
     const affil = Array.from(new Set(META.authors.map((a) => a.affiliation))).map(esc).join(" · ");
+    const paperLinks = [
+      META.arxivId ? `<a class="btn" href="https://arxiv.org/abs/${esc(META.arxivId)}" target="_blank" rel="noopener">arXiv:${esc(META.arxivId)}</a>` : "",
+      META.pdfUrl ? `<a class="btn" href="${esc(META.pdfUrl)}" target="_blank" rel="noopener">PDF</a>` : "",
+    ].join("");
     const start = META.startHere.map((id, i) => `<a class="btn ${i === 0 ? "btn--primary" : ""}" href="#${esc(id)}">${i === 0 ? "Start with " : ""}${esc(N[id].kind === "section" ? "Read the " + N[id].title.toLowerCase() : N[id].number)}</a>`).join("");
     const nTheorems = D.order.filter((id) => ["theorem", "corollary", "proposition"].includes(N[id].kind)).length;
     const html = `<div class="welcome">
-      <div class="welcome__kicker">${esc(META.kicker)} · ${esc(META.sourceVersion)}</div>
+      <div class="welcome__kicker">${esc(META.kicker)}</div>
       <h1 class="welcome__title">${esc(META.title)}</h1>
       <div class="welcome__authors">${authors}</div>
       <div class="welcome__affil">${affil}</div>
+      ${paperLinks ? `<div class="btn-row">${paperLinks}</div>` : ""}
       <div class="welcome__abstract prose">${META.abstractHtml}</div>
       <div class="btn-row">${start}<a class="btn" href="#bib">References</a></div>
       <div class="section-label">The stabilization in one picture</div>
@@ -546,7 +551,7 @@
       <div class="welcome__foot">
         <p>© ${esc(META.year)} ${authors}. ${esc(META.funding || "")}</p>
         <p>${esc(META.editorialNote || "")}</p>
-        <p>Built from the manuscript source (${esc(META.sourceVersion)}) with <code>site/build.py</code>; the site and the Lean project live at <a href="${esc(META.repoUrl)}" target="_blank" rel="noopener">${esc(META.repoUrl.replace("https://", ""))}</a>. Mathematics rendered with <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a> (MIT).</p>
+        <p>Built from the manuscript source with <code>site/build.py</code>; the site and the Lean project live at <a href="${esc(META.repoUrl)}" target="_blank" rel="noopener">${esc(META.repoUrl.replace("https://", ""))}</a>. Mathematics rendered with <a href="https://katex.org" target="_blank" rel="noopener">KaTeX</a> (MIT).</p>
       </div></div>`;
     setPanel(html);
     renderMath(content);

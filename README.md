@@ -40,10 +40,13 @@ an end-to-end formalization of Theorem 4.1 or the full Section 5 extension.
 ## Citing
 
 ```bibtex
-@unpublished{despres2026lloyd,
-  title={A Lloyd-stabilized Vorono\"i particle method},
-  author={Bruno Despr\'es and Borjan Geshkovski},
+@misc{despres2026lloyd,
+  title={A Lloyd-stabilized Voronoi particle method},
+  author={Bruno Despr{\'e}s and Borjan Geshkovski},
   year={2026},
-  note={Manuscript}
+  eprint={2609.28135},
+  archivePrefix={arXiv},
+  primaryClass={math.NA},
+  url={https://arxiv.org/abs/2609.28135}
 }
 ```
